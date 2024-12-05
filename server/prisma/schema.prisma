@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int     @id @default(autoincrement())
+  username     String
+  passwordHash String  @map("password_hash")
+  fullname     String
+  about        String?
+  avatarUrl    String? @map("avatar_url")
+
+  articles Article[]
+  comments Comment[]
+
+  @@map("users")
+}
+
+model Category {
+  id       Int       @id @default(autoincrement())
+  title    String    @unique
+  articles Article[]
+
+  @@map("categories")
+}
+
+model Article {
+  id         Int      @id @default(autoincrement())
+  title      String
+  content    String
+  imageUrl   String?  @map("image_url")
+  viewsCount Int      @default(0) @map("views_count")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  authorId Int  @map("author_id")
+  author   User @relation(fields: [authorId], references: [id])
+
+  categoryId Int      @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  comments Comment[]
+
+  @@map("articles")
+}
+
+model Comment {
+  id   Int    @id @default(autoincrement())
+  text String
+
+  userId Int  @map("user_id")
+  user   User @relation(fields: [userId], references: [id])
+
+  articleId Int     @map("article_id")
+  article   Article @relation(fields: [articleId], references: [id])
+
+  parentId Int?     @map("parent_id")
+  parent   Comment? @relation("CommentToComment", fields: [parentId], references: [id])
+
+  children Comment[] @relation("CommentToComment")
+
+  @@map("comments")
+}
