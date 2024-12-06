@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUser } from './types/create.user';
+import { EditUserDto } from './types/edit.user.dto';
 
 @Injectable()
 export class UsersService {
@@ -47,5 +48,25 @@ export class UsersService {
     });
 
     return user;
+  }
+
+  async edit(id: number, dto: EditUserDto) {
+    await this.getOneOrThrow(id);
+
+    const editedUser = await this.prismaService.user.update({
+      where: {
+        id,
+      },
+      data: dto,
+      select: {
+        id: true,
+        username: true,
+        fullname: true,
+        about: true,
+        avatarUrl: true,
+      },
+    });
+
+    return editedUser;
   }
 }
