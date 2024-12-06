@@ -30,12 +30,13 @@ model Category {
 }
 
 model Article {
-  id         Int      @id @default(autoincrement())
-  title      String
-  content    String
-  imageUrl   String?  @map("image_url")
-  viewsCount Int      @default(0) @map("views_count")
-  createdAt  DateTime @default(now()) @map("created_at")
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  content     String
+  imageUrl    String?  @map("image_url")
+  viewsCount  Int      @default(0) @map("views_count")
+  createdAt   DateTime @default(now()) @map("created_at")
 
   authorId Int  @map("author_id")
   author   User @relation(fields: [authorId], references: [id])
