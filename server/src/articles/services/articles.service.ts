@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Article } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateArticleDto } from '../dto/create.article.dto';
+import { EditArticleDto } from '../dto/edit.article.dto';
 
 @Injectable()
 export class ArticlesService {
@@ -264,7 +265,26 @@ export class ArticlesService {
     return createdArticle;
   }
 
+  async edit(id: number, dto: EditArticleDto) {
+    await this.getOneOrThrow(id);
+
+    const editedArticle = await this.prismaService.article.update({
+      where: {
+        id,
+      },
+      data: dto,
+    });
+
+    if (!editedArticle) {
+      throw new NotFoundException('Article is not found');
+    }
+
+    return editedArticle;
+  }
+
   async delete(id: number) {
+    await this.getOneOrThrow(id);
+
     const deletedArticle = await this.prismaService.article.delete({
       where: {
         id,

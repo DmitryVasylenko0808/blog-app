@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   Request,
@@ -13,6 +14,7 @@ import {
 import { ArticlesService } from '../services/articles.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateArticleDto } from '../dto/create.article.dto';
+import { EditArticleDto } from '../dto/edit.article.dto';
 
 @Controller('articles')
 export class ArticlesController {
@@ -55,6 +57,15 @@ export class ArticlesController {
   @UseGuards(AuthGuard('jwt'))
   async create(@Request() req: any, @Body() createArticleDto: CreateArticleDto) {
     return await this.articlesService.create(req.user.userId, createArticleDto);
+  }
+
+  @Patch(':id')
+  @UseGuards(AuthGuard('jwt'))
+  async edit(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() editArticleDto: EditArticleDto,
+  ) {
+    return await this.articlesService.edit(id, editArticleDto);
   }
 
   @Delete(':id')
