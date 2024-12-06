@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateCommentDto } from '../dto/create.comment.dto';
 import { ArticlesService } from './articles.service';
+import { EditCommentDto } from '../dto/edit.comment.dto';
 
 @Injectable()
 export class CommentsService {
@@ -58,6 +59,36 @@ export class CommentsService {
         articleId,
       },
     });
+
+    return comment;
+  }
+
+  async edit(articleId: number, commentId: number, dto: EditCommentDto) {
+    await this.articlesService.getOneOrThrow(articleId);
+    await this.getOneOrThrow(commentId);
+
+    const comment = this.prismaService.comment.update({
+      where: {
+        id: commentId,
+      },
+      data: {
+        ...dto,
+      },
+    });
+
+    return comment;
+  }
+
+  private async getOneOrThrow(commentId: number) {
+    const comment = await this.prismaService.comment.findUnique({
+      where: {
+        id: commentId,
+      },
+    });
+
+    if (!comment) {
+      throw new NotFoundException('Comment is not found');
+    }
 
     return comment;
   }

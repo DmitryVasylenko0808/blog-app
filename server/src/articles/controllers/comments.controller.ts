@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   Request,
@@ -12,6 +13,7 @@ import {
 import { CommentsService } from '../services/comments.service';
 import { CreateCommentDto } from '../dto/create.comment.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { EditCommentDto } from '../dto/edit.comment.dto';
 
 @Controller('articles/:articleId/comments')
 export class CommentsController {
@@ -38,5 +40,16 @@ export class CommentsController {
       articleId,
       createCommentDto,
     );
+  }
+
+  @Patch(':commentId')
+  @UseGuards(AuthGuard('jwt'))
+  async edit(
+    @Request() req: any,
+    @Param('articleId', ParseIntPipe) articleId: number,
+    @Param('commentId', ParseIntPipe) commentId: number,
+    @Body() editCommentDto: EditCommentDto,
+  ) {
+    return await this.commentsService.edit(articleId, commentId, editCommentDto);
   }
 }
