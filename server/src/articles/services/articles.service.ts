@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Article } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
@@ -115,6 +115,30 @@ export class ArticlesService {
     };
 
     return res;
+  }
+
+  async getOneOrThrow(id: number) {
+    const article = await this.prismaService.article.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            fullname: true,
+          },
+        },
+        category: true,
+      },
+    });
+
+    if (!article) {
+      throw new NotFoundException('Article is not found');
+    }
+
+    return article;
   }
 
   private formatArticleWithoutContent(articles: Article[]) {
