@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Article } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { CreateArticleDto } from '../dto/create.article.dto';
 
 @Injectable()
 export class ArticlesService {
@@ -250,6 +251,17 @@ export class ArticlesService {
     };
 
     return res;
+  }
+
+  async create(authorId: number, dto: CreateArticleDto) {
+    const createdArticle = await this.prismaService.article.create({
+      data: {
+        ...dto,
+        authorId,
+      },
+    });
+
+    return createdArticle;
   }
 
   private formatArticleWithoutContent(articles: Article[]) {

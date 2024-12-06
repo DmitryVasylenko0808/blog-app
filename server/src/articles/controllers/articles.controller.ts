@@ -1,5 +1,17 @@
-import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Query,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { ArticlesService } from '../services/articles.service';
+import { AuthGuard } from '@nestjs/passport';
+import { CreateArticleDto } from '../dto/create.article.dto';
 
 @Controller('articles')
 export class ArticlesController {
@@ -36,5 +48,11 @@ export class ArticlesController {
   @Get('search/by/title')
   async search(@Query('title') title: string, @Query('page', ParseIntPipe) page: number) {
     return await this.articlesService.search(title, page);
+  }
+
+  @Post()
+  @UseGuards(AuthGuard('jwt'))
+  async create(@Request() req: any, @Body() createArticleDto: CreateArticleDto) {
+    return await this.articlesService.create(req.user.userId, createArticleDto);
   }
 }
