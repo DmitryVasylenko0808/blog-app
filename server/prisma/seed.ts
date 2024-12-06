@@ -2153,9 +2153,768 @@ eris](#pulydamanta), nimiique.
   });
 };
 
+const generateComments = async () => {
+  const firstArticleComments = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.',
+        createdAt: '2024-12-05T08:48:05Z',
+        userId: 3,
+        articleId: 26,
+      },
+      {
+        text: 'Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum.',
+        createdAt: '2024-12-06T18:08:16Z',
+        userId: 5,
+        articleId: 26,
+      },
+      {
+        text: 'Mauris ullamcorper purus sit amet nulla.',
+        createdAt: '2024-12-05T14:20:28Z',
+        userId: 6,
+        articleId: 26,
+      },
+      {
+        text: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis.',
+        createdAt: '2024-12-06T18:40:26Z',
+        userId: 3,
+        articleId: 26,
+      },
+      {
+        text: 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.',
+        createdAt: '2024-12-05T21:24:29Z',
+        userId: 1,
+        articleId: 26,
+      },
+      {
+        text: 'Duis mattis egestas metus.',
+        createdAt: '2024-12-06T08:11:29Z',
+        userId: 2,
+        articleId: 26,
+      },
+      {
+        text: 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh. In quis justo. Maecenas rhoncus aliquam lacus.',
+        createdAt: '2024-12-05T09:13:15Z',
+        userId: 3,
+        articleId: 26,
+      },
+      {
+        text: 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
+        createdAt: '2024-12-06T21:34:17Z',
+        userId: 7,
+        articleId: 26,
+      },
+      {
+        text: 'Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.',
+        createdAt: '2024-12-05T17:33:20Z',
+        userId: 4,
+        articleId: 26,
+      },
+      {
+        text: 'Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.',
+        createdAt: '2024-12-06T20:02:56Z',
+        userId: 6,
+        articleId: 26,
+      },
+      {
+        text: 'Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo. Etiam pretium iaculis justo.',
+        createdAt: '2024-12-05T07:09:51Z',
+        userId: 8,
+        articleId: 26,
+      },
+      {
+        text: 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede.',
+        createdAt: '2024-12-06T02:27:15Z',
+        userId: 7,
+        articleId: 26,
+      },
+      {
+        text: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque.',
+        createdAt: '2024-12-05T05:50:33Z',
+        userId: 8,
+        articleId: 26,
+      },
+      {
+        text: 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.',
+        createdAt: '2024-12-05T18:29:20Z',
+        userId: 3,
+        articleId: 26,
+      },
+      {
+        text: 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante.',
+        createdAt: '2024-12-05T15:48:18Z',
+        userId: 1,
+        articleId: 26,
+      },
+      {
+        text: 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.',
+        createdAt: '2024-12-05T20:01:29Z',
+        userId: 4,
+        articleId: 26,
+      },
+      {
+        text: 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.',
+        createdAt: '2024-12-05T00:41:31Z',
+        userId: 8,
+        articleId: 26,
+      },
+      {
+        text: 'Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat.',
+        createdAt: '2024-12-06T21:11:25Z',
+        userId: 6,
+        articleId: 26,
+      },
+      {
+        text: 'Aliquam erat volutpat. In congue.',
+        createdAt: '2024-12-05T06:59:53Z',
+        userId: 1,
+        articleId: 26,
+      },
+      {
+        text: 'In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl.',
+        createdAt: '2024-12-06T08:42:39Z',
+        userId: 5,
+        articleId: 26,
+      },
+      {
+        text: 'Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat.',
+        createdAt: '2024-12-06T03:02:35Z',
+        userId: 8,
+        articleId: 26,
+      },
+      {
+        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.',
+        createdAt: '2024-12-05T13:17:27Z',
+        userId: 7,
+        articleId: 26,
+      },
+    ],
+  });
+  const secondArticleComments = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'Vivamus vestibulum sagittis sapien.',
+        createdAt: '2024-12-06T17:45:57Z',
+        userId: 2,
+        articleId: 30,
+      },
+      {
+        text: 'Praesent blandit.',
+        createdAt: '2024-12-06T00:00:24Z',
+        userId: 8,
+        articleId: 30,
+      },
+      {
+        text: 'Duis at velit eu est congue elementum. In hac habitasse platea dictumst.',
+        createdAt: '2024-12-02T21:19:56Z',
+        userId: 2,
+        articleId: 30,
+      },
+      {
+        text: 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio.',
+        createdAt: '2024-12-03T13:48:15Z',
+        userId: 5,
+        articleId: 30,
+      },
+      {
+        text: 'In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh.',
+        createdAt: '2024-12-06T23:39:08Z',
+        userId: 2,
+        articleId: 30,
+      },
+      {
+        text: 'Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.',
+        createdAt: '2024-12-05T22:41:45Z',
+        userId: 3,
+        articleId: 30,
+      },
+      {
+        text: 'Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst.',
+        createdAt: '2024-12-05T19:47:27Z',
+        userId: 7,
+        articleId: 30,
+      },
+      {
+        text: 'Integer a nibh.',
+        createdAt: '2024-12-06T14:09:42Z',
+        userId: 4,
+        articleId: 30,
+      },
+    ],
+  });
+  const thirstArticleComments = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue.',
+        createdAt: '2024-11-29T13:51:35Z',
+        userId: 1,
+        articleId: 14,
+      },
+      {
+        text: 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.',
+        createdAt: '2024-11-30T20:36:36Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Praesent lectus.',
+        createdAt: '2024-12-02T13:22:53Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.',
+        createdAt: '2024-11-24T04:57:52Z',
+        userId: 5,
+        articleId: 14,
+      },
+      {
+        text: 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.',
+        createdAt: '2024-11-29T15:07:21Z',
+        userId: 8,
+        articleId: 14,
+      },
+      {
+        text: 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.',
+        createdAt: '2024-12-06T21:27:02Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo.',
+        createdAt: '2024-12-03T01:16:53Z',
+        userId: 1,
+        articleId: 14,
+      },
+      {
+        text: 'Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis.',
+        createdAt: '2024-11-26T01:32:20Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Nulla justo. Aliquam quis turpis eget elit sodales scelerisque.',
+        createdAt: '2024-11-30T08:29:03Z',
+        userId: 4,
+        articleId: 14,
+      },
+      {
+        text: 'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh.',
+        createdAt: '2024-12-05T06:15:09Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Morbi quis tortor id nulla ultrices aliquet.',
+        createdAt: '2024-11-26T06:07:08Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.',
+        createdAt: '2024-12-06T09:14:56Z',
+        userId: 4,
+        articleId: 14,
+      },
+      {
+        text: 'Praesent blandit.',
+        createdAt: '2024-11-28T12:34:13Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.',
+        createdAt: '2024-11-26T08:06:25Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.',
+        createdAt: '2024-12-01T11:36:38Z',
+        userId: 1,
+        articleId: 14,
+      },
+      {
+        text: 'Sed vel enim sit amet nunc viverra dapibus.',
+        createdAt: '2024-11-26T20:51:24Z',
+        userId: 5,
+        articleId: 14,
+      },
+      {
+        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+        createdAt: '2024-12-06T04:12:49Z',
+        userId: 5,
+        articleId: 14,
+      },
+      {
+        text: 'Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
+        createdAt: '2024-12-06T04:49:49Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Duis at velit eu est congue elementum.',
+        createdAt: '2024-11-26T12:17:15Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Phasellus in felis. Donec semper sapien a libero. Nam dui.',
+        createdAt: '2024-12-04T15:37:14Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero. Nullam sit amet turpis elementum ligula vehicula consequat.',
+        createdAt: '2024-12-03T10:29:35Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus vestibulum sagittis sapien.',
+        createdAt: '2024-11-29T06:23:07Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc.',
+        createdAt: '2024-11-26T18:19:09Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Duis bibendum. Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl.',
+        createdAt: '2024-11-28T23:04:10Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.',
+        createdAt: '2024-11-27T10:09:40Z',
+        userId: 1,
+        articleId: 14,
+      },
+      {
+        text: 'Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem. Integer tincidunt ante vel ipsum.',
+        createdAt: '2024-12-03T17:02:28Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis.',
+        createdAt: '2024-12-01T10:18:57Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit.',
+        createdAt: '2024-11-25T08:31:06Z',
+        userId: 8,
+        articleId: 14,
+      },
+      {
+        text: 'Duis mattis egestas metus.',
+        createdAt: '2024-11-25T15:03:09Z',
+        userId: 4,
+        articleId: 14,
+      },
+      {
+        text: 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti.',
+        createdAt: '2024-11-29T15:30:23Z',
+        userId: 2,
+        articleId: 14,
+      },
+      {
+        text: 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus.',
+        createdAt: '2024-12-04T17:05:07Z',
+        userId: 5,
+        articleId: 14,
+      },
+      {
+        text: 'Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.',
+        createdAt: '2024-12-02T20:15:38Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis. Duis consequat dui nec nisi volutpat eleifend.',
+        createdAt: '2024-11-30T01:15:17Z',
+        userId: 7,
+        articleId: 14,
+      },
+      {
+        text: 'Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt.',
+        createdAt: '2024-12-05T22:23:09Z',
+        userId: 8,
+        articleId: 14,
+      },
+      {
+        text: 'Morbi non quam nec dui luctus rutrum. Nulla tellus. In sagittis dui vel nisl.',
+        createdAt: '2024-11-27T17:48:39Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Quisque ut erat. Curabitur gravida nisi at nibh.',
+        createdAt: '2024-12-04T18:49:20Z',
+        userId: 1,
+        articleId: 14,
+      },
+      {
+        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.',
+        createdAt: '2024-12-04T08:24:45Z',
+        userId: 6,
+        articleId: 14,
+      },
+      {
+        text: 'Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede.',
+        createdAt: '2024-11-27T20:58:28Z',
+        userId: 5,
+        articleId: 14,
+      },
+      {
+        text: 'Etiam faucibus cursus urna. Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi.',
+        createdAt: '2024-12-01T15:13:44Z',
+        userId: 6,
+        articleId: 14,
+      },
+      {
+        text: 'Praesent blandit lacinia erat.',
+        createdAt: '2024-11-29T08:19:22Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Donec quis orci eget orci vehicula condimentum. Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat.',
+        createdAt: '2024-11-27T20:43:21Z',
+        userId: 3,
+        articleId: 14,
+      },
+      {
+        text: 'Ut at dolor quis odio consequat varius. Integer ac leo.',
+        createdAt: '2024-12-02T10:49:39Z',
+        userId: 4,
+        articleId: 14,
+      },
+      {
+        text: 'Phasellus sit amet erat.',
+        createdAt: '2024-11-25T21:48:28Z',
+        userId: 5,
+        articleId: 14,
+      },
+    ],
+  });
+  const fourthArticleComments = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla.',
+        createdAt: '2024-11-20T07:42:25Z',
+        userId: 3,
+        articleId: 7,
+      },
+      {
+        text: 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.',
+        createdAt: '2024-11-21T17:09:34Z',
+        userId: 5,
+        articleId: 7,
+      },
+      {
+        text: 'Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.',
+        createdAt: '2024-11-24T13:52:07Z',
+        userId: 2,
+        articleId: 7,
+      },
+      {
+        text: 'Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.',
+        createdAt: '2024-11-26T19:53:57Z',
+        userId: 7,
+        articleId: 7,
+      },
+      {
+        text: 'Nunc purus.',
+        createdAt: '2024-12-05T01:09:49Z',
+        userId: 7,
+        articleId: 7,
+      },
+      {
+        text: 'Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus.',
+        createdAt: '2024-11-28T16:25:02Z',
+        userId: 8,
+        articleId: 7,
+      },
+      {
+        text: 'Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui.',
+        createdAt: '2024-11-09T07:26:43Z',
+        userId: 3,
+        articleId: 7,
+      },
+      {
+        text: 'Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc.',
+        createdAt: '2024-11-24T20:19:22Z',
+        userId: 8,
+        articleId: 7,
+      },
+      {
+        text: 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.',
+        createdAt: '2024-12-01T14:17:58Z',
+        userId: 4,
+        articleId: 7,
+      },
+      {
+        text: 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.',
+        createdAt: '2024-11-24T14:51:08Z',
+        userId: 5,
+        articleId: 7,
+      },
+      {
+        text: 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy.',
+        createdAt: '2024-11-23T09:24:27Z',
+        userId: 8,
+        articleId: 7,
+      },
+      {
+        text: 'Nunc purus. Phasellus in felis.',
+        createdAt: '2024-11-08T23:33:25Z',
+        userId: 2,
+        articleId: 7,
+      },
+    ],
+  });
+  const fifthArticleComments = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui.',
+        createdAt: '2024-12-04T20:22:43Z',
+        userId: 1,
+        articleId: 21,
+      },
+      {
+        text: 'In hac habitasse platea dictumst. Etiam faucibus cursus urna.',
+        createdAt: '2024-12-06T00:29:44Z',
+        userId: 4,
+        articleId: 21,
+      },
+      {
+        text: 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla.',
+        createdAt: '2024-12-06T04:47:28Z',
+        userId: 3,
+        articleId: 21,
+      },
+      {
+        text: 'Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+        createdAt: '2024-12-05T01:36:38Z',
+        userId: 2,
+        articleId: 21,
+      },
+      {
+        text: 'Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus.',
+        createdAt: '2024-12-06T17:08:44Z',
+        userId: 7,
+        articleId: 21,
+      },
+      {
+        text: 'Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.',
+        createdAt: '2024-12-04T21:49:28Z',
+        userId: 7,
+        articleId: 21,
+      },
+      {
+        text: 'Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.',
+        createdAt: '2024-12-05T01:35:17Z',
+        userId: 4,
+        articleId: 21,
+      },
+      {
+        text: 'Nunc purus.',
+        createdAt: '2024-12-05T16:05:00Z',
+        userId: 8,
+        articleId: 21,
+      },
+      {
+        text: 'Donec ut dolor. Morbi vel lectus in quam fringilla rhoncus.',
+        createdAt: '2024-12-05T22:30:30Z',
+        userId: 7,
+        articleId: 21,
+      },
+      {
+        text: 'Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.',
+        createdAt: '2024-12-06T13:39:20Z',
+        userId: 4,
+        articleId: 21,
+      },
+      {
+        text: 'Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti.',
+        createdAt: '2024-12-05T13:29:40Z',
+        userId: 6,
+        articleId: 21,
+      },
+      {
+        text: 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue.',
+        createdAt: '2024-12-06T18:36:45Z',
+        userId: 8,
+        articleId: 21,
+      },
+      {
+        text: 'Nulla tellus. In sagittis dui vel nisl. Duis ac nibh.',
+        createdAt: '2024-12-06T07:10:38Z',
+        userId: 7,
+        articleId: 21,
+      },
+      {
+        text: 'Duis ac nibh.',
+        createdAt: '2024-12-04T10:03:55Z',
+        userId: 2,
+        articleId: 21,
+      },
+      {
+        text: 'Aenean fermentum.',
+        createdAt: '2024-12-04T08:19:21Z',
+        userId: 6,
+        articleId: 21,
+      },
+      {
+        text: 'Vivamus in felis eu sapien cursus vestibulum.',
+        createdAt: '2024-12-04T06:11:45Z',
+        userId: 3,
+        articleId: 21,
+      },
+      {
+        text: 'Ut tellus. Nulla ut erat id mauris vulputate elementum. Nullam varius. Nulla facilisi. Cras non velit nec nisi vulputate nonummy.',
+        createdAt: '2024-12-04T12:36:16Z',
+        userId: 6,
+        articleId: 21,
+      },
+      {
+        text: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+        createdAt: '2024-12-05T04:59:09Z',
+        userId: 7,
+        articleId: 21,
+      },
+      {
+        text: 'Etiam justo. Etiam pretium iaculis justo.',
+        createdAt: '2024-12-05T12:12:11Z',
+        userId: 4,
+        articleId: 21,
+      },
+      {
+        text: 'Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.',
+        createdAt: '2024-12-05T23:58:50Z',
+        userId: 6,
+        articleId: 21,
+      },
+      {
+        text: 'Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst.',
+        createdAt: '2024-12-05T00:35:32Z',
+        userId: 5,
+        articleId: 21,
+      },
+      {
+        text: 'Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus. Nulla suscipit ligula in lacus. Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.',
+        createdAt: '2024-12-05T22:26:46Z',
+        userId: 7,
+        articleId: 21,
+      },
+      {
+        text: 'Cras pellentesque volutpat dui.',
+        createdAt: '2024-12-05T14:53:23Z',
+        userId: 8,
+        articleId: 21,
+      },
+      {
+        text: 'Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque.',
+        createdAt: '2024-12-05T19:01:38Z',
+        userId: 1,
+        articleId: 21,
+      },
+      {
+        text: 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla.',
+        createdAt: '2024-12-04T11:04:57Z',
+        userId: 8,
+        articleId: 21,
+      },
+      {
+        text: 'Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi. Nam ultrices, libero non mattis pulvinar, nulla pede ullamcorper augue, a suscipit nulla elit ac nulla. Sed vel enim sit amet nunc viverra dapibus.',
+        createdAt: '2024-12-06T05:56:26Z',
+        userId: 5,
+        articleId: 21,
+      },
+      {
+        text: 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.',
+        createdAt: '2024-12-06T01:59:15Z',
+        userId: 3,
+        articleId: 21,
+      },
+      {
+        text: 'Vivamus tortor.',
+        createdAt: '2024-12-04T22:13:27Z',
+        userId: 6,
+        articleId: 21,
+      },
+      {
+        text: 'Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis.',
+        createdAt: '2024-12-05T03:31:18Z',
+        userId: 4,
+        articleId: 21,
+      },
+      {
+        text: 'Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.',
+        createdAt: '2024-12-04T18:02:56Z',
+        userId: 1,
+        articleId: 21,
+      },
+      {
+        text: 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede.',
+        createdAt: '2024-12-04T04:05:53Z',
+        userId: 6,
+        articleId: 21,
+      },
+      {
+        text: 'Integer tincidunt ante vel ipsum. Praesent blandit lacinia erat.',
+        createdAt: '2024-12-05T00:56:29Z',
+        userId: 3,
+        articleId: 21,
+      },
+      {
+        text: 'Morbi porttitor lorem id ligula.',
+        createdAt: '2024-12-06T16:31:20Z',
+        userId: 2,
+        articleId: 21,
+      },
+    ],
+  });
+  const sixthArticleComments = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'In sagittis dui vel nisl.',
+        createdAt: '2024-12-06T09:11:53Z',
+        userId: 4,
+        articleId: 22,
+      },
+      {
+        text: 'Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc.',
+        createdAt: '2024-12-06T16:40:23Z',
+        userId: 4,
+        articleId: 22,
+      },
+      {
+        text: 'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero.',
+        createdAt: '2024-12-04T03:12:27Z',
+        userId: 3,
+        articleId: 22,
+      },
+      {
+        text: 'Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl.',
+        createdAt: '2024-12-06T21:38:14Z',
+        userId: 8,
+        articleId: 22,
+      },
+    ],
+  });
+};
+
 const truncateTables = async () => {
   await prisma.$executeRawUnsafe(
-    `TRUNCATE TABLE users, categories, articles RESTART IDENTITY CASCADE`,
+    `TRUNCATE TABLE users, categories, articles, comments RESTART IDENTITY CASCADE`,
   );
 };
 
@@ -2165,6 +2924,7 @@ const main = async () => {
   await generateUsers();
   await generateCategories();
   await generateArticles();
+  await generateComments();
 };
 
 main()
