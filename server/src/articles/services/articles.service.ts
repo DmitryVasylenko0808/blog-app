@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Article } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()
@@ -25,7 +26,9 @@ export class ArticlesService {
       },
     });
 
-    return articles;
+    const articlesWithoutContent = this.formatArticleWithoutContent(articles);
+
+    return articlesWithoutContent;
   }
 
   async getRecently(page: number, categoriesIds?: string) {
@@ -66,13 +69,24 @@ export class ArticlesService {
       },
     });
     const totalPages = Math.ceil(totalCount / LIMIT);
+    const articlesWithoutContent = this.formatArticleWithoutContent(articles);
     const res = {
-      data: articles,
+      data: articlesWithoutContent,
       totalCount,
       totalPages,
       currentPage: page,
     };
 
     return res;
+  }
+
+  private formatArticleWithoutContent(articles: Article[]) {
+    const articlesWithoutContent = articles.map((a) => {
+      const { content, ...item } = a;
+
+      return item;
+    });
+
+    return articlesWithoutContent;
   }
 }
