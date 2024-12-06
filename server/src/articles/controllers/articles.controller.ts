@@ -32,4 +32,9 @@ export class ArticlesController {
   async getRelated(@Param('id', ParseIntPipe) id: number) {
     return await this.articlesService.getRelated(id);
   }
+
+  @Get('search/by/title')
+  async search(@Query('title') title: string, @Query('page', ParseIntPipe) page: number) {
+    return await this.articlesService.search(title, page);
+  }
 }
