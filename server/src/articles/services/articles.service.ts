@@ -5,6 +5,29 @@ import { PrismaService } from 'src/prisma.service';
 export class ArticlesService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async getPopular() {
+    const LIMIT = 6;
+
+    const articles = await this.prismaService.article.findMany({
+      orderBy: {
+        viewsCount: 'desc',
+      },
+      take: LIMIT,
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            avatarUrl: true,
+          },
+        },
+        category: true,
+      },
+    });
+
+    return articles;
+  }
+
   async getRecently(page: number, categoriesIds?: string) {
     const LIMIT = 8;
 
@@ -26,6 +49,7 @@ export class ArticlesService {
       include: {
         author: {
           select: {
+            id: true,
             username: true,
             avatarUrl: true,
           },

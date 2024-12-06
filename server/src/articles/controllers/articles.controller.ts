@@ -5,6 +5,11 @@ import { ArticlesService } from '../services/articles.service';
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
+  @Get('popular')
+  async getPopular() {
+    return await this.articlesService.getPopular();
+  }
+
   @Get('recently')
   async getRecently(
     @Query('page', ParseIntPipe) page: number,
