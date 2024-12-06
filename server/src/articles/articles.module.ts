@@ -8,5 +8,6 @@ import { ArticlesController } from './controllers/articles.controller';
 @Module({
   providers: [PrismaService, CategoriesService, ArticlesService],
   controllers: [CategoriesController, ArticlesController],
+  exports: [ArticlesService],
 })
 export class ArticlesModule {}

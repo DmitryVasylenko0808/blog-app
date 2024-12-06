@@ -215,6 +215,43 @@ export class ArticlesService {
     return res;
   }
 
+  async getByUser(userId: number, page: number) {
+    const LIMIT = 8;
+
+    const articles = await this.prismaService.article.findMany({
+      where: {
+        authorId: userId,
+      },
+      skip: (page - 1) * LIMIT,
+      take: LIMIT,
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            avatarUrl: true,
+          },
+        },
+        category: true,
+      },
+    });
+    const articlesWithoutContent = this.formatArticleWithoutContent(articles);
+    const totalCount = await this.prismaService.article.count({
+      where: {
+        authorId: userId,
+      },
+    });
+    const totalPages = Math.ceil(totalCount / LIMIT);
+    const res = {
+      data: articlesWithoutContent,
+      totalCount,
+      totalPages,
+      currentPage: page,
+    };
+
+    return res;
+  }
+
   private formatArticleWithoutContent(articles: Article[]) {
     const articlesWithoutContent = articles.map((a) => {
       const { content, ...item } = a;
