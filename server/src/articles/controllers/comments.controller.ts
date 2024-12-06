@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -45,11 +46,19 @@ export class CommentsController {
   @Patch(':commentId')
   @UseGuards(AuthGuard('jwt'))
   async edit(
-    @Request() req: any,
     @Param('articleId', ParseIntPipe) articleId: number,
     @Param('commentId', ParseIntPipe) commentId: number,
     @Body() editCommentDto: EditCommentDto,
   ) {
     return await this.commentsService.edit(articleId, commentId, editCommentDto);
+  }
+
+  @Delete(':commentId')
+  @UseGuards(AuthGuard('jwt'))
+  async delete(
+    @Param('articleId', ParseIntPipe) articleId: number,
+    @Param('commentId', ParseIntPipe) commentId: number,
+  ) {
+    return await this.commentsService.delete(articleId, commentId);
   }
 }

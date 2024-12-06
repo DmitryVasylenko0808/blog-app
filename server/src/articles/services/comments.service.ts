@@ -67,12 +67,25 @@ export class CommentsService {
     await this.articlesService.getOneOrThrow(articleId);
     await this.getOneOrThrow(commentId);
 
-    const comment = this.prismaService.comment.update({
+    const comment = await this.prismaService.comment.update({
       where: {
         id: commentId,
       },
       data: {
         ...dto,
+      },
+    });
+
+    return comment;
+  }
+
+  async delete(articleId: number, commentId: number) {
+    await this.articlesService.getOneOrThrow(articleId);
+    await this.getOneOrThrow(commentId);
+
+    const comment = await this.prismaService.comment.delete({
+      where: {
+        id: commentId,
       },
     });
 
