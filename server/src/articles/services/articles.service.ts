@@ -264,6 +264,20 @@ export class ArticlesService {
     return createdArticle;
   }
 
+  async delete(id: number) {
+    const deletedArticle = await this.prismaService.article.delete({
+      where: {
+        id,
+      },
+    });
+
+    if (!deletedArticle) {
+      throw new NotFoundException('Article is not found');
+    }
+
+    return deletedArticle;
+  }
+
   private formatArticleWithoutContent(articles: Article[]) {
     const articlesWithoutContent = articles.map((a) => {
       const { content, ...item } = a;

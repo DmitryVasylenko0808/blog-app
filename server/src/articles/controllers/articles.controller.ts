@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -54,5 +55,11 @@ export class ArticlesController {
   @UseGuards(AuthGuard('jwt'))
   async create(@Request() req: any, @Body() createArticleDto: CreateArticleDto) {
     return await this.articlesService.create(req.user.userId, createArticleDto);
+  }
+
+  @Delete(':id')
+  @UseGuards(AuthGuard('jwt'))
+  async delete(@Param('id', ParseIntPipe) id: number) {
+    return await this.articlesService.delete(id);
   }
 }
