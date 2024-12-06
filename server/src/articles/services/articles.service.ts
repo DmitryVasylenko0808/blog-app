@@ -6,6 +6,43 @@ import { PrismaService } from 'src/prisma.service';
 export class ArticlesService {
   constructor(private readonly prismaService: PrismaService) {}
 
+  async getFeatured() {
+    const LIMIT = 4;
+
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    const dateFrom = new Date(currentYear, currentMonth);
+    const dateTo = new Date(currentYear, currentMonth + 1);
+
+    const articles = await this.prismaService.article.findMany({
+      where: {
+        createdAt: {
+          gte: dateFrom,
+          lt: dateTo,
+        },
+      },
+      orderBy: {
+        viewsCount: 'desc',
+      },
+      take: LIMIT,
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            avatarUrl: true,
+          },
+        },
+        category: true,
+      },
+    });
+
+    const articlesWithoutContent = this.formatArticleWithoutContent(articles);
+
+    return articlesWithoutContent;
+  }
+
   async getPopular() {
     const LIMIT = 6;
 

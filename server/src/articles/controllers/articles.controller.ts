@@ -5,6 +5,11 @@ import { ArticlesService } from '../services/articles.service';
 export class ArticlesController {
   constructor(private readonly articlesService: ArticlesService) {}
 
+  @Get('featured')
+  async getFeatured() {
+    return await this.articlesService.getFeatured();
+  }
+
   @Get('popular')
   async getPopular() {
     return await this.articlesService.getPopular();
