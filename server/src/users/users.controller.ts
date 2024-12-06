@@ -9,6 +9,11 @@ export class UsersController {
     private readonly articlesService: ArticlesService,
   ) {}
 
+  @Get(':id')
+  async getOne(@Param('id', ParseIntPipe) id: number) {
+    return await this.usersService.getOneOrThrow(id);
+  }
+
   @Get(':id/articles')
   async getUserArticles(
     @Param('id', ParseIntPipe) id: number,
