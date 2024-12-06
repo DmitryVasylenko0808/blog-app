@@ -141,6 +141,37 @@ export class ArticlesService {
     return article;
   }
 
+  async getRelated(id: number) {
+    const LIMIT = 2;
+
+    const article = await this.getOneOrThrow(id);
+    const relatedArticles = await this.prismaService.article.findMany({
+      where: {
+        id: {
+          not: id,
+        },
+        categoryId: article.categoryId,
+      },
+      orderBy: {
+        viewsCount: 'desc',
+      },
+      take: LIMIT,
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            fullname: true,
+          },
+        },
+        category: true,
+      },
+    });
+    const articlesWithoutContent = this.formatArticleWithoutContent(relatedArticles);
+
+    return articlesWithoutContent;
+  }
+
   private formatArticleWithoutContent(articles: Article[]) {
     const articlesWithoutContent = articles.map((a) => {
       const { content, ...item } = a;

@@ -27,4 +27,9 @@ export class ArticlesController {
   async getOne(@Param('id', ParseIntPipe) id: number) {
     return await this.articlesService.getOneOrThrow(id);
   }
+
+  @Get(':id/related')
+  async getRelated(@Param('id', ParseIntPipe) id: number) {
+    return await this.articlesService.getRelated(id);
+  }
 }
