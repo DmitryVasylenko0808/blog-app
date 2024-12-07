@@ -17,6 +17,7 @@ export class CommentsService {
     const comments = await this.prismaService.comment.findMany({
       where: {
         articleId,
+        parentId: null,
       },
       orderBy: {
         createdAt: sort,
@@ -31,11 +32,13 @@ export class CommentsService {
             avatarUrl: true,
           },
         },
+        _count: true,
       },
     });
     const totalCount = await this.prismaService.comment.count({
       where: {
         articleId,
+        parentId: null,
       },
     });
     const totalPages = Math.ceil(totalCount / LIMIT);
@@ -90,6 +93,32 @@ export class CommentsService {
     });
 
     return comment;
+  }
+
+  async getReplies(articleId: number, commentId: number) {
+    await this.articlesService.getOneOrThrow(articleId);
+    await this.getOneOrThrow(commentId);
+
+    const replies = await this.prismaService.comment.findMany({
+      where: {
+        parentId: commentId,
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            avatarUrl: true,
+          },
+        },
+        _count: true,
+      },
+    });
+
+    return replies;
   }
 
   private async getOneOrThrow(commentId: number) {

@@ -61,4 +61,12 @@ export class CommentsController {
   ) {
     return await this.commentsService.delete(articleId, commentId);
   }
+
+  @Get(':commentId/replies')
+  async getReplies(
+    @Param('articleId', ParseIntPipe) articleId: number,
+    @Param('commentId', ParseIntPipe) commentId: number,
+  ) {
+    return await this.commentsService.getReplies(articleId, commentId);
+  }
 }

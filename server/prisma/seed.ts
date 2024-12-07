@@ -2910,6 +2910,57 @@ const generateComments = async () => {
       },
     ],
   });
+
+  const firstCommentReplies = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum.',
+        createdAt: '2024-12-07T17:57:12Z',
+        userId: 7,
+        articleId: 22,
+        parentId: 122,
+      },
+      {
+        text: 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.',
+        createdAt: '2024-12-07T21:46:09Z',
+        userId: 3,
+        articleId: 22,
+        parentId: 122,
+      },
+      {
+        text: 'Nulla neque libero, convallis eget, eleifend luctus, ultricies eu, nibh. Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique.',
+        createdAt: '2024-12-07T22:56:11Z',
+        userId: 5,
+        articleId: 22,
+        parentId: 122,
+      },
+      {
+        text: 'Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.',
+        createdAt: '2024-12-07T08:32:22Z',
+        userId: 2,
+        articleId: 22,
+        parentId: 122,
+      },
+    ],
+  });
+  const firstCommentRepliesChildren = await prisma.comment.createMany({
+    data: [
+      {
+        text: 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl. Aenean lectus. Pellentesque eget nunc.',
+        createdAt: '2024-12-07T19:27:40Z',
+        userId: 2,
+        articleId: 22,
+        parentId: 126,
+      },
+      {
+        text: 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim.',
+        createdAt: '2024-12-07T02:50:12Z',
+        userId: 4,
+        articleId: 22,
+        parentId: 126,
+      },
+    ],
+  });
 };
 
 const truncateTables = async () => {
