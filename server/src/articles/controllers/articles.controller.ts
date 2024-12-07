@@ -3,18 +3,24 @@ import {
   Controller,
   Delete,
   Get,
+  HttpStatus,
   Param,
+  ParseFilePipeBuilder,
   ParseIntPipe,
   Patch,
   Post,
   Query,
   Request,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ArticlesService } from '../services/articles.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateArticleDto } from '../dto/create.article.dto';
 import { EditArticleDto } from '../dto/edit.article.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { uploadsStorage } from 'src/multer';
 
 @Controller('articles')
 export class ArticlesController {
@@ -55,17 +61,40 @@ export class ArticlesController {
 
   @Post()
   @UseGuards(AuthGuard('jwt'))
-  async create(@Request() req: any, @Body() createArticleDto: CreateArticleDto) {
-    return await this.articlesService.create(req.user.userId, createArticleDto);
+  @UseInterceptors(FileInterceptor('imageFile', { storage: uploadsStorage }))
+  async create(
+    @Request() req: any,
+    @Body() createArticleDto: CreateArticleDto,
+    @UploadedFile(
+      new ParseFilePipeBuilder().addFileTypeValidator({ fileType: 'jpeg' }).build({
+        fileIsRequired: false,
+        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      }),
+    )
+    file?: Express.Multer.File,
+  ) {
+    return await this.articlesService.create(
+      req.user.userId,
+      createArticleDto,
+      file?.filename,
+    );
   }
 
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
+  @UseInterceptors(FileInterceptor('imageFile', { storage: uploadsStorage }))
   async edit(
     @Param('id', ParseIntPipe) id: number,
     @Body() editArticleDto: EditArticleDto,
+    @UploadedFile(
+      new ParseFilePipeBuilder().addFileTypeValidator({ fileType: 'jpeg' }).build({
+        fileIsRequired: false,
+        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      }),
+    )
+    file?: Express.Multer.File,
   ) {
-    return await this.articlesService.edit(id, editArticleDto);
+    return await this.articlesService.edit(id, editArticleDto, file?.filename);
   }
 
   @Delete(':id')

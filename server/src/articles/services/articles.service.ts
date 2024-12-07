@@ -254,25 +254,31 @@ export class ArticlesService {
     return res;
   }
 
-  async create(authorId: number, dto: CreateArticleDto) {
+  async create(authorId: number, dto: CreateArticleDto, filename?: string) {
     const createdArticle = await this.prismaService.article.create({
       data: {
         ...dto,
+        imageUrl: filename,
         authorId,
+        categoryId: Number(dto.categoryId),
       },
     });
 
     return createdArticle;
   }
 
-  async edit(id: number, dto: EditArticleDto) {
+  async edit(id: number, dto: EditArticleDto, filename?: string) {
     await this.getOneOrThrow(id);
 
     const editedArticle = await this.prismaService.article.update({
       where: {
         id,
       },
-      data: dto,
+      data: {
+        ...dto,
+        categoryId: Number(dto.categoryId),
+        imageUrl: filename,
+      },
     });
 
     if (!editedArticle) {
