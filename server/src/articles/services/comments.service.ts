@@ -121,6 +121,27 @@ export class CommentsService {
     return replies;
   }
 
+  async reply(
+    userId: number,
+    articleId: number,
+    commentId: number,
+    dto: CreateCommentDto,
+  ) {
+    await this.articlesService.getOneOrThrow(articleId);
+    await this.getOneOrThrow(commentId);
+
+    const comment = await this.prismaService.comment.create({
+      data: {
+        ...dto,
+        parentId: commentId,
+        articleId,
+        userId,
+      },
+    });
+
+    return comment;
+  }
+
   private async getOneOrThrow(commentId: number) {
     const comment = await this.prismaService.comment.findUnique({
       where: {

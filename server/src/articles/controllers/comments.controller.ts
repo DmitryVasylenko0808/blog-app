@@ -69,4 +69,20 @@ export class CommentsController {
   ) {
     return await this.commentsService.getReplies(articleId, commentId);
   }
+
+  @Post(':commentId/replies')
+  @UseGuards(AuthGuard('jwt'))
+  async reply(
+    @Request() req: any,
+    @Param('articleId', ParseIntPipe) articleId: number,
+    @Param('commentId', ParseIntPipe) commentId: number,
+    @Body() createCommentDto: CreateCommentDto,
+  ) {
+    return await this.commentsService.reply(
+      req.user.userId,
+      articleId,
+      commentId,
+      createCommentDto,
+    );
+  }
 }
