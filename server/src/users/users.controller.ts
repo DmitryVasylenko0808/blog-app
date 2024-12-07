@@ -2,16 +2,22 @@ import {
   Body,
   Controller,
   Get,
+  HttpStatus,
   Param,
+  ParseFilePipeBuilder,
   ParseIntPipe,
   Patch,
   Query,
+  UploadedFile,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ArticlesService } from 'src/articles/services/articles.service';
 import { EditUserDto } from './types/edit.user.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { uploadsStorage } from 'src/multer';
 
 @Controller('users')
 export class UsersController {
@@ -32,8 +38,19 @@ export class UsersController {
 
   @Patch(':id')
   @UseGuards(AuthGuard('jwt'))
-  async edit(@Param('id', ParseIntPipe) id: number, @Body() editUserDto: EditUserDto) {
-    return await this.usersService.edit(id, editUserDto);
+  @UseInterceptors(FileInterceptor('avatarFile', { storage: uploadsStorage }))
+  async edit(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() editUserDto: EditUserDto,
+    @UploadedFile(
+      new ParseFilePipeBuilder().addFileTypeValidator({ fileType: 'jpeg' }).build({
+        fileIsRequired: false,
+        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
+      }),
+    )
+    file?: Express.Multer.File,
+  ) {
+    return await this.usersService.edit(id, editUserDto, file?.filename);
   }
 
   @Get(':id/articles')

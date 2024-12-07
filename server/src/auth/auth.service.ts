@@ -11,7 +11,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signUp(data: SignUpDto) {
+  async signUp(data: SignUpDto, filename?: string) {
     const existedUser = await this.usersService.getByUsername(data.username);
 
     if (existedUser) {
@@ -22,6 +22,7 @@ export class AuthService {
     const createdUser = await this.usersService.create({
       username: data.username,
       fullname: data.fullname,
+      avatarUrl: filename,
       passwordHash,
     });
 

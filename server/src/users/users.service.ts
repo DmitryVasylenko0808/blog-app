@@ -69,22 +69,27 @@ export class UsersService {
     const user = await this.prismaService.user.create({
       data,
       select: {
+        id: true,
         username: true,
         fullname: true,
+        avatarUrl: true,
       },
     });
 
     return user;
   }
 
-  async edit(id: number, dto: EditUserDto) {
+  async edit(id: number, dto: EditUserDto, filename?: string) {
     await this.getOneOrThrow(id);
 
     const editedUser = await this.prismaService.user.update({
       where: {
         id,
       },
-      data: dto,
+      data: {
+        ...dto,
+        avatarUrl: filename,
+      },
       select: {
         id: true,
         username: true,
