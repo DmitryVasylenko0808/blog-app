@@ -20,6 +20,11 @@ export class UsersController {
     private readonly articlesService: ArticlesService,
   ) {}
 
+  @Get('top')
+  async getTop() {
+    return await this.usersService.getTop();
+  }
+
   @Get(':id')
   async getOne(@Param('id', ParseIntPipe) id: number) {
     return await this.usersService.getOneOrThrow(id);
