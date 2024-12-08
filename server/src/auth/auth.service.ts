@@ -3,6 +3,8 @@ import { SignUpDto } from './dto/sign.up.dto';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/users/users.service';
+import { User } from '@prisma/client';
+import { TokenPayload } from './types/token.payload';
 
 @Injectable()
 export class AuthService {
@@ -29,11 +31,13 @@ export class AuthService {
     return createdUser;
   }
 
-  async signIn(data: any) {
-    const { id } = data;
-    const token = await this.generateToken(id);
+  async signIn(user: User) {
+    const tokenPayload: TokenPayload = {
+      userId: user.id,
+    };
+    const access_token = await this.generateAccessToken(tokenPayload);
 
-    return { token };
+    return { access_token };
   }
 
   async validateUser(username: string, password: string) {
@@ -54,9 +58,9 @@ export class AuthService {
     return res;
   }
 
-  private async generateToken(userId: string) {
-    const token = await this.jwtService.signAsync({ userId });
+  private async generateAccessToken(tokenPayload: TokenPayload) {
+    const access_token = await this.jwtService.signAsync(tokenPayload);
 
-    return token;
+    return access_token;
   }
 }

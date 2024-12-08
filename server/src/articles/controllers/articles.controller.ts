@@ -21,6 +21,8 @@ import { CreateArticleDto } from '../dto/create.article.dto';
 import { EditArticleDto } from '../dto/edit.article.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { uploadsStorage } from 'src/multer';
+import { CurrentUser } from 'src/auth/decorators';
+import { TokenPayload } from 'src/auth/types/token.payload';
 
 @Controller('articles')
 export class ArticlesController {
@@ -63,7 +65,7 @@ export class ArticlesController {
   @UseGuards(AuthGuard('jwt'))
   @UseInterceptors(FileInterceptor('imageFile', { storage: uploadsStorage }))
   async create(
-    @Request() req: any,
+    @CurrentUser() user: TokenPayload,
     @Body() createArticleDto: CreateArticleDto,
     @UploadedFile(
       new ParseFilePipeBuilder().addFileTypeValidator({ fileType: 'jpeg' }).build({
@@ -74,7 +76,7 @@ export class ArticlesController {
     file?: Express.Multer.File,
   ) {
     return await this.articlesService.create(
-      req.user.userId,
+      user.userId,
       createArticleDto,
       file?.filename,
     );

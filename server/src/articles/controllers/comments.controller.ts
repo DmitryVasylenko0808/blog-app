@@ -15,6 +15,8 @@ import { CommentsService } from '../services/comments.service';
 import { CreateCommentDto } from '../dto/create.comment.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { EditCommentDto } from '../dto/edit.comment.dto';
+import { CurrentUser } from 'src/auth/decorators';
+import { TokenPayload } from 'src/auth/types/token.payload';
 
 @Controller('articles/:articleId/comments')
 export class CommentsController {
@@ -32,15 +34,11 @@ export class CommentsController {
   @Post()
   @UseGuards(AuthGuard('jwt'))
   async create(
-    @Request() req: any,
+    @CurrentUser() user: TokenPayload,
     @Param('articleId', ParseIntPipe) articleId: number,
     @Body() createCommentDto: CreateCommentDto,
   ) {
-    return await this.commentsService.create(
-      req.user.userId,
-      articleId,
-      createCommentDto,
-    );
+    return await this.commentsService.create(user.userId, articleId, createCommentDto);
   }
 
   @Patch(':commentId')
@@ -73,13 +71,13 @@ export class CommentsController {
   @Post(':commentId/replies')
   @UseGuards(AuthGuard('jwt'))
   async reply(
-    @Request() req: any,
+    @CurrentUser() user: TokenPayload,
     @Param('articleId', ParseIntPipe) articleId: number,
     @Param('commentId', ParseIntPipe) commentId: number,
     @Body() createCommentDto: CreateCommentDto,
   ) {
     return await this.commentsService.reply(
-      req.user.userId,
+      user.userId,
       articleId,
       commentId,
       createCommentDto,

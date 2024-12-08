@@ -16,6 +16,9 @@ import { SignUpDto } from './dto/sign.up.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { uploadsStorage } from 'src/multer';
+import { CurrentUser } from './decorators';
+import { User } from '@prisma/client';
+import { TokenPayload } from './types/token.payload';
 
 @Controller('auth')
 export class AuthController {
@@ -39,13 +42,13 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('sign-in')
   @HttpCode(HttpStatus.OK)
-  async signIn(@Request() req: any) {
-    return await this.authService.signIn(req.user);
+  async signIn(@CurrentUser() user: User) {
+    return await this.authService.signIn(user);
   }
 
   @UseGuards(AuthGuard('jwt'))
   @Get('me')
-  async getMe(@Request() req: any) {
-    return req.user;
+  async getMe(@CurrentUser() user: TokenPayload) {
+    return user;
   }
 }
