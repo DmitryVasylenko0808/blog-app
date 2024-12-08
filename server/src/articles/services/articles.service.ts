@@ -254,6 +254,46 @@ export class ArticlesService {
     return res;
   }
 
+  async getByCategory(categoryId: number, page: number) {
+    const LIMIT = 10;
+
+    const articles = await this.prismaService.article.findMany({
+      where: {
+        categoryId,
+      },
+      skip: (page - 1) * LIMIT,
+      take: LIMIT,
+      orderBy: {
+        createdAt: 'desc',
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            avatarUrl: true,
+          },
+        },
+        category: true,
+      },
+    });
+    const articlesWithoutContent = this.formatArticleWithoutContent(articles);
+    const totalCount = await this.prismaService.article.count({
+      where: {
+        categoryId,
+      },
+    });
+    const totalPages = Math.ceil(totalCount / LIMIT);
+    const res = {
+      data: articlesWithoutContent,
+      totalCount,
+      totalPages,
+      currentPage: page,
+    };
+
+    return res;
+  }
+
   async create(authorId: number, dto: CreateArticleDto, filename?: string) {
     const createdArticle = await this.prismaService.article.create({
       data: {
