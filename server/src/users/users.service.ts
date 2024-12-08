@@ -2,13 +2,13 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUser } from './types/create.user';
 import { EditUserDto } from './types/edit.user.dto';
-import { ArticlesService } from 'src/articles/services/articles.service';
+import { ArticlesStatsService } from 'src/articles/services/articles.stats.service';
 
 @Injectable()
 export class UsersService {
   constructor(
     private readonly prismaService: PrismaService,
-    private readonly articlesService: ArticlesService,
+    private readonly articlesStatsService: ArticlesStatsService,
   ) {}
 
   async getOneOrThrow(id: number) {
@@ -43,7 +43,7 @@ export class UsersService {
   }
 
   async getTop() {
-    const topSummaryViews = await this.articlesService.getTopSummaryViews(3);
+    const topSummaryViews = await this.articlesStatsService.getTopSummaryViews(3);
     const users = await this.prismaService.user.findMany({
       where: {
         id: {

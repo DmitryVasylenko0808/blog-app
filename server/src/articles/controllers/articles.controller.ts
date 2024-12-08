@@ -10,7 +10,6 @@ import {
   Patch,
   Post,
   Query,
-  Request,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -23,10 +22,14 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { uploadsStorage } from 'src/multer';
 import { CurrentUser } from 'src/auth/decorators';
 import { TokenPayload } from 'src/auth/types/token.payload';
+import { ArticlesManagementService } from '../services/articles.management.service';
 
 @Controller('articles')
 export class ArticlesController {
-  constructor(private readonly articlesService: ArticlesService) {}
+  constructor(
+    private readonly articlesService: ArticlesService,
+    private readonly articleManagementService: ArticlesManagementService,
+  ) {}
 
   @Get('featured')
   async getFeatured() {
@@ -75,7 +78,7 @@ export class ArticlesController {
     )
     file?: Express.Multer.File,
   ) {
-    return await this.articlesService.create(
+    return await this.articleManagementService.create(
       user.userId,
       createArticleDto,
       file?.filename,
@@ -96,12 +99,12 @@ export class ArticlesController {
     )
     file?: Express.Multer.File,
   ) {
-    return await this.articlesService.edit(id, editArticleDto, file?.filename);
+    return await this.articleManagementService.edit(id, editArticleDto, file?.filename);
   }
 
   @Delete(':id')
   @UseGuards(AuthGuard('jwt'))
   async delete(@Param('id', ParseIntPipe) id: number) {
-    return await this.articlesService.delete(id);
+    return await this.articleManagementService.delete(id);
   }
 }

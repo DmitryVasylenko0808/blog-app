@@ -3,6 +3,7 @@ import { Article } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
 import { CreateArticleDto } from '../dto/create.article.dto';
 import { EditArticleDto } from '../dto/edit.article.dto';
+import { ArticlesPagination } from '../types/articles.pagination';
 
 @Injectable()
 export class ArticlesService {
@@ -109,7 +110,7 @@ export class ArticlesService {
     });
     const totalPages = Math.ceil(totalCount / LIMIT);
     const articlesWithoutContent = this.formatArticleWithoutContent(articles);
-    const res = {
+    const res: ArticlesPagination = {
       data: articlesWithoutContent,
       totalCount,
       totalPages,
@@ -207,7 +208,7 @@ export class ArticlesService {
       },
     });
     const totalPages = Math.ceil(totalCount / LIMIT);
-    const res = {
+    const res: ArticlesPagination = {
       data: articlesWithoutContent,
       totalCount,
       totalPages,
@@ -244,7 +245,7 @@ export class ArticlesService {
       },
     });
     const totalPages = Math.ceil(totalCount / LIMIT);
-    const res = {
+    const res: ArticlesPagination = {
       data: articlesWithoutContent,
       totalCount,
       totalPages,
@@ -284,88 +285,12 @@ export class ArticlesService {
       },
     });
     const totalPages = Math.ceil(totalCount / LIMIT);
-    const res = {
+    const res: ArticlesPagination = {
       data: articlesWithoutContent,
       totalCount,
       totalPages,
       currentPage: page,
     };
-
-    return res;
-  }
-
-  async create(authorId: number, dto: CreateArticleDto, filename?: string) {
-    const createdArticle = await this.prismaService.article.create({
-      data: {
-        ...dto,
-        imageUrl: filename,
-        authorId,
-        categoryId: Number(dto.categoryId),
-      },
-    });
-
-    return createdArticle;
-  }
-
-  async edit(id: number, dto: EditArticleDto, filename?: string) {
-    await this.getOneOrThrow(id);
-
-    const editedArticle = await this.prismaService.article.update({
-      where: {
-        id,
-      },
-      data: {
-        ...dto,
-        categoryId: Number(dto.categoryId),
-        imageUrl: filename,
-      },
-    });
-
-    if (!editedArticle) {
-      throw new NotFoundException('Article is not found');
-    }
-
-    return editedArticle;
-  }
-
-  async delete(id: number) {
-    await this.getOneOrThrow(id);
-
-    const deletedArticle = await this.prismaService.article.delete({
-      where: {
-        id,
-      },
-    });
-
-    if (!deletedArticle) {
-      throw new NotFoundException('Article is not found');
-    }
-
-    return deletedArticle;
-  }
-
-  async getTopSummaryViews(limit: number) {
-    const summaryViews = await this.prismaService.article.groupBy({
-      by: ['authorId'],
-      _sum: {
-        viewsCount: true,
-      },
-      orderBy: {
-        _sum: {
-          viewsCount: 'desc',
-        },
-      },
-      take: limit,
-    });
-    const formattedByUserId = summaryViews.reduce(
-      (res, curr) => ({
-        [curr.authorId]: curr._sum.viewsCount,
-        ...res,
-      }),
-      {},
-    );
-    const usersIds = summaryViews.map((item) => item.authorId);
-    const res = { stats: formattedByUserId, usersIds };
 
     return res;
   }
