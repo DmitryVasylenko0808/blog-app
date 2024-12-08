@@ -1,8 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Article } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
-import { CreateArticleDto } from '../dto/create.article.dto';
-import { EditArticleDto } from '../dto/edit.article.dto';
 import { ArticlesPagination } from '../types/articles.pagination';
 
 @Injectable()
