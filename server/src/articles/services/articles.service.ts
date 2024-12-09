@@ -139,6 +139,17 @@ export class ArticlesService {
       throw new NotFoundException('Article is not found');
     }
 
+    await this.prismaService.article.update({
+      where: {
+        id,
+      },
+      data: {
+        viewsCount: {
+          increment: 1,
+        },
+      },
+    });
+
     return article;
   }
 
