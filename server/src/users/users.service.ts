@@ -59,8 +59,8 @@ export class UsersService {
     });
 
     const res = users
-      .map((user) => ({ ...user, viewCount: topSummaryViews.stats[user.id] }))
-      .sort((a, b) => (a.viewCount < b.viewCount ? 1 : -1));
+      .map((user) => ({ ...user, articlesSummaryViews: topSummaryViews.stats[user.id] }))
+      .sort((a, b) => (a.articlesSummaryViews < b.articlesSummaryViews ? 1 : -1));
 
     return res;
   }
