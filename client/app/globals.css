@@ -6,16 +6,19 @@
   --primary-color-100: #F2F8F7;
   --primary-color-200: #DFF1F0;
   --primary-color-300: #00AAA1;
+  --primary-color-400: #029B93;
+  --outline-color: #999999;
 
-  --text-primary: #222222;
-  --text-secondary: #333333;
-  --text-tertiary: #555555;
-  --text-tag: #666666;
-  --text-meta: #777777;
+  --text-primary-color: #222222;
+  --text-secondary-color: #333333;
+  --text-tertiary-color: #555555;
+  --text-tag-color: #666666;
+  --text-meta-color: #777777;
+  --text-error-color: #DC2626;
 }
 
 body {
-  color: var(--text-tertiary);
+  color: var(--text-tertiary-color);
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
 }
