@@ -25,18 +25,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('sign-up')
-  @UseInterceptors(FileInterceptor('avatarFile', { storage: uploadsStorage }))
-  async signUp(
-    @Body() dto: SignUpDto,
-    @UploadedFile(
-      new ParseFilePipeBuilder().addFileTypeValidator({ fileType: 'jpeg' }).build({
-        fileIsRequired: false,
-        errorHttpStatusCode: HttpStatus.UNPROCESSABLE_ENTITY,
-      }),
-    )
-    file?: Express.Multer.File,
-  ) {
-    return await this.authService.signUp(dto, file?.filename);
+  async signUp(@Body() dto: SignUpDto) {
+    return await this.authService.signUp(dto);
   }
 
   @UseGuards(AuthGuard('local'))
