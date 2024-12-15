@@ -12,15 +12,15 @@ const TextArea = ({
   className,
   ...inputProps
 }: TextAreaProps) => {
-  const classes = cn(
-    "block px-4 py-2.5 border border-primary-250 rounded-md resize-none",
-    className
-  );
+  const classes = cn("min-w-64 flex flex-col", className);
 
   return (
-    <div className="min-w-64 flex flex-col">
+    <div className={classes}>
       {label && <label className="block mb-1 text-sm">{label}</label>}
-      <textarea className={classes} {...inputProps} />
+      <textarea
+        className="block px-4 py-2.5 border border-primary-250 rounded-md resize-none"
+        {...inputProps}
+      />
       {error && <p className="text-sm text-text-error">{error}</p>}
     </div>
   );
