@@ -1,5 +1,7 @@
 "use server";
 
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 const signUpSchema = z
@@ -33,7 +35,7 @@ export type SignUpState = {
   };
 } | null;
 
-const signUp = async (prevState: SignUpState, formData: FormData) => {
+export const signUp = async (prevState: SignUpState, formData: FormData) => {
   const validatedFields = signUpSchema.safeParse({
     username: formData.get("username"),
     password: formData.get("password"),
@@ -68,4 +70,62 @@ const signUp = async (prevState: SignUpState, formData: FormData) => {
   return null;
 };
 
-export default signUp;
+const signInSchema = z.object({
+  username: z.string().min(1, "Username is required"),
+  password: z.string().min(1, "Password is required"),
+});
+
+export type SignInState = {
+  errors?: {
+    username?: string;
+    password?: string;
+    root?: string;
+  };
+} | null;
+
+export const signIn = async (prevState: SignInState, formData: FormData) => {
+  const validatedFields = signInSchema.safeParse({
+    username: formData.get("username"),
+    password: formData.get("password"),
+  });
+
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    } as SignInState;
+  }
+
+  const rawFormData = validatedFields.data;
+  const res = await fetch("http://localhost:4444/api/auth/sign-in", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(rawFormData),
+  });
+  const parsedRes = await res.json();
+
+  if (!res.ok) {
+    return {
+      errors: {
+        root: parsedRes.message,
+      },
+    } as SignInState;
+  }
+
+  const { access_token } = parsedRes;
+  const cookieStore = await cookies();
+  const currentDate = new Date();
+  const expirationDate = currentDate.setDate(currentDate.getDate() + 30);
+
+  cookieStore.set({
+    name: "access_token",
+    value: access_token,
+    secure: true,
+    httpOnly: true,
+    sameSite: "lax",
+    expires: expirationDate,
+  });
+
+  redirect("/");
+};

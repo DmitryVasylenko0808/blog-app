@@ -1,6 +1,6 @@
 "use client";
 
-import signUp, { SignUpState } from "@/app/actions/auth";
+import { signUp } from "@/app/actions/auth";
 import { Button, Loader, TextField } from "@/shared/ui";
 import { useActionState } from "react";
 
