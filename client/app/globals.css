@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --primary-color-100: #F2F8F7;
-  --primary-color-200: #DFF1F0;
-  --primary-color-300: #00AAA1;
-  --primary-color-400: #029B93;
+  --primary-color-100: #f2f8f7;
+  --primary-color-200: #dff1f0;
+  --primary-color-250: #01c7bd;
+  --primary-color-300: #00aaa1;
+  --primary-color-400: #029b93;
   --outline-color: #999999;
 
   --text-primary-color: #222222;
@@ -14,7 +15,7 @@
   --text-tertiary-color: #555555;
   --text-tag-color: #666666;
   --text-meta-color: #777777;
-  --text-error-color: #DC2626;
+  --text-error-color: #dc2626;
 }
 
 body {
@@ -24,39 +25,48 @@ body {
 }
 
 @layer base {
-  h1, h2, h3, h4, h5, h6 {
-    @apply text-text-primary
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-text-primary;
   }
 
-  h1, h2, h3, h4 {
-    @apply font-semibold 
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-semibold;
   }
 
-  h5, h6 {
-    @apply font-medium
+  h5,
+  h6 {
+    @apply font-medium;
   }
 
   h1 {
-    @apply text-3xl
+    @apply text-3xl;
   }
 
   h2 {
-    @apply text-2xl
+    @apply text-2xl;
   }
 
   h3 {
-    @apply text-xl
+    @apply text-xl;
   }
 
   h4 {
-    @apply text-lg
+    @apply text-lg;
   }
 
   h5 {
-    @apply text-base
+    @apply text-base;
   }
 
   h6 {
-    @apply text-sm
+    @apply text-sm;
   }
 }
