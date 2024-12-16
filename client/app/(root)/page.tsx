@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { verifySession } from "../lib/session";
+import { verifySession } from "../_lib/session";
 
 export default async function HomePage() {
   const session = await verifySession();

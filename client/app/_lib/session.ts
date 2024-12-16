@@ -24,6 +24,13 @@ export const deleteSession = async () => {
   cookieStore.delete("access_token");
 };
 
+export const getSession = cache(async () => {
+  const cookieStore = await cookies();
+  const access_token = cookieStore.get("access_token")?.value;
+
+  return access_token;
+});
+
 export const verifySession = cache(async () => {
   const cookieStore = await cookies();
   const access_token = cookieStore.get("access_token")?.value;

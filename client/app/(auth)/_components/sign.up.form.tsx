@@ -1,6 +1,6 @@
 "use client";
 
-import { signUp } from "@/app/actions/auth";
+import { signUp } from "@/app/(auth)/_lib/actions";
 import { Button, Loader, TextField } from "@/shared/ui";
 import { useActionState } from "react";
 
