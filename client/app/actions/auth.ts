@@ -1,8 +1,8 @@
 "use server";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { createSession, deleteSession } from "../lib/session";
 
 const signUpSchema = z
   .object({
@@ -114,18 +114,12 @@ export const signIn = async (prevState: SignInState, formData: FormData) => {
   }
 
   const { access_token } = parsedRes;
-  const cookieStore = await cookies();
-  const currentDate = new Date();
-  const expirationDate = currentDate.setDate(currentDate.getDate() + 30);
 
-  cookieStore.set({
-    name: "access_token",
-    value: access_token,
-    secure: true,
-    httpOnly: true,
-    sameSite: "lax",
-    expires: expirationDate,
-  });
-
+  await createSession(access_token);
   redirect("/");
+};
+
+export const logOut = async () => {
+  await deleteSession();
+  redirect("/sign-in");
 };

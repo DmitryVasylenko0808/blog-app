@@ -1,6 +1,11 @@
 import Link from "next/link";
+import { verifySession } from "../lib/session";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await verifySession();
+
+  console.log("session", session);
+
   return (
     <div>
       <h1>HomePage</h1>
