@@ -9,6 +9,7 @@
   --primary-color-300: #00aaa1;
   --primary-color-400: #029b93;
   --outline-color: #999999;
+  --scrollbar-color: #c4c4c4;
 
   --text-primary-color: #222222;
   --text-secondary-color: #333333;
@@ -69,4 +70,16 @@ body {
   h6 {
     @apply text-sm;
   }
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 3px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-color);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: var(--primary-color-300);
 }

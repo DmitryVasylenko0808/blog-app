@@ -1,3 +1,9 @@
+import { ArticlesOverview } from "./_components";
+
 export default async function HomePage() {
-  return <></>;
+  return (
+    <>
+      <ArticlesOverview />
+    </>
+  );
 }
