@@ -2,8 +2,8 @@ import { cn } from "@/utils/cn";
 import { ComponentPropsWithRef } from "react";
 
 type ButtonProps = ComponentPropsWithRef<"button"> & {
-  variant: "primary" | "secondary";
-  size: "sm" | "md";
+  variant: "primary" | "secondary" | "tertiary";
+  size?: "sm" | "md";
 };
 
 const Button = ({
@@ -19,6 +19,7 @@ const Button = ({
       "bg-primary-300 text-white hover:bg-primary-400 active:bg-primary":
         variant === "primary",
       "text-outline border border-outline": variant === "secondary",
+      "text-primary": variant === "tertiary",
       "min-w-[100px] h-10 px-7": size === "sm",
       "min-w-[120px] h-11 px-6": size === "md",
     },
