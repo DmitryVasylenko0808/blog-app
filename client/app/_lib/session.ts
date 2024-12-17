@@ -1,7 +1,9 @@
 import "server-only";
 import { cookies } from "next/headers";
 import { cache } from "react";
-import { jwtDecode } from "jwt-decode";
+import { jwtDecode, JwtPayload } from "jwt-decode";
+
+type JWTPayload = JwtPayload & { userId: string };
 
 export const createSession = async (access_token: string) => {
   const cookieStore = await cookies();
@@ -39,7 +41,7 @@ export const verifySession = cache(async () => {
     return null;
   }
 
-  const payload = jwtDecode(access_token);
+  const payload = jwtDecode(access_token) as JWTPayload;
 
   return payload;
 });

@@ -27,6 +27,12 @@ export default {
           error: "var(--text-error-color)",
         },
       },
+      height: {
+        header: "70px",
+      },
+      maxWidth: {
+        container: "1295px",
+      },
     },
   },
   plugins: [],
