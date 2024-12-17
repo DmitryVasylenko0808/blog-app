@@ -2,6 +2,7 @@ import { Container } from "@/shared/ui";
 import { Suspense } from "react";
 import ArticlesFeatured from "./articles.featured";
 import ArticlesSkeleton from "./articles.skeleton";
+import ArticlesPopular from "./articles.popular";
 
 const ArticlesOverview = () => {
   return (
@@ -14,7 +15,13 @@ const ArticlesOverview = () => {
         >
           <ArticlesFeatured />
         </Suspense>
-        <div className="min-w-[362px]"></div>
+        <Suspense
+          fallback={
+            <ArticlesSkeleton countItems={2} className="min-w-[362px]" />
+          }
+        >
+          <ArticlesPopular />
+        </Suspense>
       </Container>
     </section>
   );
