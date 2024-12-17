@@ -1,13 +1,14 @@
 import { cn } from "@/utils/cn";
 import { ComponentProps } from "react";
 import ArticleItem from "./article.item";
+import { Article } from "@/app/(root)/_lib/services/dto/get.featured.articles.dto";
 
 type ArticlesListProps = ComponentProps<"ul"> & {
-  data?: unknown[];
+  data: Article[];
 };
 
 const ArticlesList = ({
-  data,
+  data = [],
   className,
   ...otherProps
 }: ArticlesListProps) => {
@@ -15,10 +16,9 @@ const ArticlesList = ({
 
   return (
     <ul className={classes} {...otherProps}>
-      <ArticleItem />
-      <ArticleItem />
-      <ArticleItem />
-      <ArticleItem />
+      {data.map((article) => (
+        <ArticleItem data={article} key={article.id} />
+      ))}
     </ul>
   );
 };

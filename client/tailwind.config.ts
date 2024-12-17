@@ -18,6 +18,8 @@ export default {
           400: "var(--primary-color-400)",
         },
         outline: "var(--outline-color)",
+        scrollbar: "var(--scrollbar-color)",
+        skeleton: "var(--skeleton-color)",
         text: {
           primary: "var(--text-primary-color)",
           secondary: "var(--text-secondary-color)",

@@ -8,7 +8,7 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   async (cfg) => {
     const access_token = await getSession();
-    console.log("axois", access_token);
+
     if (access_token) {
       cfg.headers.Authorization = `Bearer ${access_token}`;
     }

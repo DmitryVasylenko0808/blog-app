@@ -1,7 +1,10 @@
 import { ArticlesList } from "@/shared/components";
 import { Title } from "@/shared/ui";
+import { ArticlesService } from "../_lib/services/articles.service";
 
-const ArticlesFeatured = () => {
+const ArticlesFeatured = async () => {
+  const articles = await ArticlesService.getFeatured();
+
   return (
     <div>
       <Title
@@ -10,7 +13,10 @@ const ArticlesFeatured = () => {
         normalText="This Month"
         className="mb-14"
       />
-      <ArticlesList className="h-[422px] pr-[268px] overflow-y-auto scrollbar" />
+      <ArticlesList
+        data={articles}
+        className="h-[422px] pr-[268px] overflow-y-auto scrollbar"
+      />
     </div>
   );
 };
