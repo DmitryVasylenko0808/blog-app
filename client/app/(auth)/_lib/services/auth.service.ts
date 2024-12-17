@@ -37,4 +37,16 @@ export class AuthService {
       }
     }
   }
+
+  static async getMe() {
+    try {
+      const res = await axiosInstance.get("/auth/me");
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
 }
