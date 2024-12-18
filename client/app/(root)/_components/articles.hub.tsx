@@ -1,22 +1,32 @@
 import { Container } from "@/shared/ui";
-import ArticleRecently from "./articles.recently";
+import ArticlesRecently from "./articles.recently";
 import { Suspense } from "react";
 import ArticlesSkeleton from "./articles.skeleton";
+import Categories from "./categories";
+import CategoriesSkeleton from "./categories.skeleton";
 
 type ArticlesHubProps = {
   currentPage: number;
+  categoriesIds?: string;
 };
 
-const ArticlesHub = ({ currentPage }: ArticlesHubProps) => {
+const ArticlesHub = ({ currentPage, categoriesIds }: ArticlesHubProps) => {
   return (
     <section>
       <Container className="pt-20 pb-32 flex gap-x-20">
         <Suspense
           fallback={<ArticlesSkeleton countItems={6} className="flex-1" />}
         >
-          <ArticleRecently currentPage={currentPage} />
+          <ArticlesRecently
+            currentPage={currentPage}
+            categoriesIds={categoriesIds}
+          />
         </Suspense>
-        <div className="min-w-[362px]">Articles Hub Sidebar</div>
+        <div className="w-[362px]">
+          <Suspense fallback={<CategoriesSkeleton />}>
+            <Categories />
+          </Suspense>
+        </div>
       </Container>
     </section>
   );

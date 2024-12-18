@@ -6,7 +6,7 @@ import { GetRecentlyArticlesDto } from "./dto/get.recently.articles.dto";
 
 type GetRecentlyArticlesParams = {
   page?: number;
-  categoriesIds?: number[];
+  categoriesIds?: string;
 };
 
 export class ArticlesService {
@@ -46,7 +46,7 @@ export class ArticlesService {
         {
           params: {
             page,
-            categoriesIds: categoriesIds?.join(","),
+            categories_ids: categoriesIds,
           },
         }
       );

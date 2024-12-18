@@ -7,8 +7,11 @@ import ArticlesPopular from "./articles.popular";
 import ArticlesPopularView from "./articles.popular.view";
 import ArticlesPopularCard from "./articles.popular.card";
 import ArticlesHub from "./articles.hub";
-import ArticleRecently from "./articles.recently";
+import ArticlesRecently from "./articles.recently";
 import ArticlesSkeleton from "./articles.skeleton";
+import Categories from "./categories";
+import SearchWithTags from "./search.with.tags";
+import CategoriesSkeleton from "./categories.skeleton";
 
 export {
   Header,
@@ -20,6 +23,9 @@ export {
   ArticlesPopularView,
   ArticlesPopularCard,
   ArticlesHub,
-  ArticleRecently,
+  ArticlesRecently,
   ArticlesSkeleton,
+  Categories,
+  SearchWithTags,
+  CategoriesSkeleton,
 };

@@ -4,10 +4,17 @@ import { Title } from "@/shared/ui";
 
 type ArticleRecentlyProps = {
   currentPage: number;
+  categoriesIds?: string;
 };
 
-const ArticleRecently = async ({ currentPage }: ArticleRecentlyProps) => {
-  const data = await ArticlesService.getRecently({ page: currentPage });
+const ArticlesRecently = async ({
+  currentPage,
+  categoriesIds,
+}: ArticleRecentlyProps) => {
+  const data = await ArticlesService.getRecently({
+    page: currentPage,
+    categoriesIds,
+  });
 
   return (
     <div className="flex-1">
@@ -23,4 +30,4 @@ const ArticleRecently = async ({ currentPage }: ArticleRecentlyProps) => {
   );
 };
 
-export default ArticleRecently;
+export default ArticlesRecently;
