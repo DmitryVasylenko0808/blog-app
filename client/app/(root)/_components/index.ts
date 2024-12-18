@@ -1,4 +1,5 @@
 import Header from "./header";
+import Footer from "./footer";
 import NavBar from "./navbar";
 import Account from "./account";
 import ArticlesOverview from "./articles.overview";
@@ -18,6 +19,7 @@ import TopAuthorsSkeleton from "./top.authors.skeleton";
 
 export {
   Header,
+  Footer,
   NavBar,
   Account,
   ArticlesOverview,
