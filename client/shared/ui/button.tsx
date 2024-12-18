@@ -16,7 +16,7 @@ const Button = ({
   const classes = cn(
     "inline-flex items-center justify-center rounded-md gap-1.5",
     {
-      "bg-primary-300 text-white hover:bg-primary-400 active:bg-primary":
+      "bg-primary-300 text-white hover:bg-primary-400 active:bg-primary-400 disabled:bg-primary-400":
         variant === "primary",
       "text-outline border border-outline": variant === "secondary",
       "text-primary": variant === "tertiary",

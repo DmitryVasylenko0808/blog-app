@@ -1,6 +1,6 @@
 import { Title } from "@/shared/ui";
 import ArticlesPopularView from "./articles.popular.view";
-import { ArticlesService } from "../_lib/services/articles.service";
+import { ArticlesService } from "@/services/articles/articles.service";
 
 const ArticlesPopular = async () => {
   const data = await ArticlesService.getPopular();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { axiosInstance } from "../../../_lib/axiosInstance";
+import { axiosInstance } from "@/app/_lib/axiosInstance";
 import { SignInDto } from "./dto/sign.in.dto";
 
 type SignUpParams = {

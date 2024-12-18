@@ -1,6 +1,6 @@
+import { ArticlesService } from "@/services/articles/articles.service";
 import { ArticlesList } from "@/shared/components";
 import { Title } from "@/shared/ui";
-import { ArticlesService } from "../_lib/services/articles.service";
 
 const ArticlesFeatured = async () => {
   const articles = await ArticlesService.getFeatured();

@@ -3,7 +3,7 @@
 import { createSession } from "@/app/_lib/session";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { AuthService } from "../services/auth.service";
+import { AuthService } from "@/services/auth/auth.service";
 
 const signInSchema = z.object({
   username: z.string().min(1, "Username is required"),
