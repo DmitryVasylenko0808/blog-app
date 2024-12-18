@@ -4,6 +4,8 @@ import { Suspense } from "react";
 import ArticlesSkeleton from "./articles.skeleton";
 import Categories from "./categories";
 import CategoriesSkeleton from "./categories.skeleton";
+import TopAuthors from "./top.authors";
+import TopAuthorsSkeleton from "./top.authors.skeleton";
 
 type ArticlesHubProps = {
   currentPage: number;
@@ -23,6 +25,9 @@ const ArticlesHub = ({ currentPage, categoriesIds }: ArticlesHubProps) => {
           />
         </Suspense>
         <div className="w-[362px]">
+          <Suspense fallback={<TopAuthorsSkeleton />}>
+            <TopAuthors />
+          </Suspense>
           <Suspense fallback={<CategoriesSkeleton />}>
             <Categories />
           </Suspense>

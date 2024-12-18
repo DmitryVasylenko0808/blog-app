@@ -1,4 +1,4 @@
-import { Article } from "../_lib/services/dto/get.popular.articles.dto";
+import { Article } from "@/services/articles/dto/get.popular.articles.dto";
 import ArticlesPopularCard from "./articles.popular.card";
 
 type ArticlesPopularViewProps = {

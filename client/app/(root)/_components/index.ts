@@ -12,6 +12,9 @@ import ArticlesSkeleton from "./articles.skeleton";
 import Categories from "./categories";
 import SearchWithTags from "./search.with.tags";
 import CategoriesSkeleton from "./categories.skeleton";
+import TopAuthors from "./top.authors";
+import TopAuthorItem from "./top.author.item";
+import TopAuthorsSkeleton from "./top.authors.skeleton";
 
 export {
   Header,
@@ -28,4 +31,7 @@ export {
   Categories,
   SearchWithTags,
   CategoriesSkeleton,
+  TopAuthors,
+  TopAuthorItem,
+  TopAuthorsSkeleton,
 };

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Article } from "../_lib/services/dto/get.popular.articles.dto";
+import { Article } from "@/services/articles/dto/get.popular.articles.dto";
 import { Eye } from "lucide-react";
 
 type ArticlesPopularCardProps = {
