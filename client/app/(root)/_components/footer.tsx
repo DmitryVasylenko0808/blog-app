@@ -28,7 +28,9 @@ const Footer = async () => {
               <ul className="flex flex-col space-y-4">
                 {categories.map((cat: Category) => (
                   <li key={cat.id}>
-                    <Link href="/">{cat.title}</Link>
+                    <Link href={`/categories/${cat.id}/articles`}>
+                      {cat.title}
+                    </Link>
                   </li>
                 ))}
               </ul>
