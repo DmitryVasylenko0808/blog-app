@@ -1,4 +1,4 @@
-import { Article } from "@/app/(root)/_lib/services/dto/get.featured.articles.dto";
+import { Article } from "@/services/articles/dto/get.recently.articles.dto";
 import { CalendarDays, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,7 +20,10 @@ const ArticleItem = ({ data }: ArticleItemProps) => {
           <Link href="/post">{data.title}</Link>
         </h3>
         <div className="mb-4 flex gap-x-2.5 items-center text-xs text-text-meta">
-          <Link href="/" className="inline-flex items-center">
+          <Link
+            href={`/users/${data.authorId}`}
+            className="inline-flex items-center"
+          >
             <img
               width={18}
               height={18}

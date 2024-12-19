@@ -16,7 +16,10 @@ const ArticlesPopularCard = ({ article }: ArticlesPopularCardProps) => {
         <Link href="/">{article.title}</Link>
       </h4>
       <div className="flex gap-x-2.5 items-center text-xs text-text-meta">
-        <Link href="/" className="inline-flex items-center">
+        <Link
+          href={`/users/${article.authorId}`}
+          className="inline-flex items-center"
+        >
           <img
             width={18}
             height={18}
