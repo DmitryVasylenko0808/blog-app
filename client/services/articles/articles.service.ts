@@ -3,10 +3,16 @@ import axios from "axios";
 import { GetFeaturedArticlesDto } from "./dto/get.featured.articles.dto";
 import { GetPopularArticlesDto } from "./dto/get.popular.articles.dto";
 import { GetRecentlyArticlesDto } from "./dto/get.recently.articles.dto";
+import { GetSearchedArticlesDto } from "./dto/get.searched.articles.dto";
 
 type GetRecentlyArticlesParams = {
   page?: number;
   categoriesIds?: string;
+};
+
+type GetSearchedArticlesParams = {
+  page: number;
+  title?: string;
 };
 
 export class ArticlesService {
@@ -47,6 +53,27 @@ export class ArticlesService {
           params: {
             page,
             categories_ids: categoriesIds,
+          },
+        }
+      );
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async getSearched(params: GetSearchedArticlesParams) {
+    try {
+      const { page, title } = params;
+      const res = await axiosInstance.get<GetSearchedArticlesDto>(
+        "/articles/search/by/title",
+        {
+          params: {
+            page,
+            title,
           },
         }
       );
