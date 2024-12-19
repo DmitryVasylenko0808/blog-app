@@ -10,7 +10,14 @@ type CategoryArticlesProps = {
 const CategoryArticles = ({ data, page }: CategoryArticlesProps) => {
   return (
     <Container className="pt-20 pb-24">
-      <ResultPanel value={data?.data[0].category.title} />
+      <ResultPanel
+        title={
+          <span>
+            Articles by category{" "}
+            <span className="font-semibold">{data.data[0].category.title}</span>
+          </span>
+        }
+      />
       <ArticlesList data={data.data} />
       <Pagination totalPages={data.totalPages} currentPage={page} />
     </Container>

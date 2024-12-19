@@ -1,17 +1,13 @@
 import React from "react";
 
 type ResultPanelProps = {
-  value?: string;
+  title?: string | React.ReactNode;
 };
 
-const ResultPanel = ({ value }: ResultPanelProps) => {
+const ResultPanel = ({ title }: ResultPanelProps) => {
   return (
     <div className="mb-14 flex">
-      <div className="pb-3 border-b-2 border-b-primary-300">
-        <span>
-          Articles by category <span className="font-semibold">{value}</span>
-        </span>
-      </div>
+      <div className="pb-3 border-b-2 border-b-primary-300">{title}</div>
       <div className="flex-auto border-b border-b-outline" />
     </div>
   );
