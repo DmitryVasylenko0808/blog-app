@@ -1,11 +1,16 @@
+import { verifySession } from "@/app/_lib/session";
 import { UserDetails } from "@/services/users/dto/get.one.user.dto";
 import { Container } from "@/shared/ui";
+import EditProfile from "./edit.profile";
 
 type UserProfileProps = {
   user: UserDetails;
 };
 
-const UserProfile = ({ user }: UserProfileProps) => {
+const UserProfile = async ({ user }: UserProfileProps) => {
+  const session = await verifySession();
+  const isCurrentUser = Number(session?.userId) === user.id;
+
   return (
     <div className="bg-primary-100">
       <Container className="pt-20 pb-24">
@@ -18,6 +23,7 @@ const UserProfile = ({ user }: UserProfileProps) => {
             />
           </div>
           <div className="flex-auto">
+            {isCurrentUser && <EditProfile />}
             <h2 className="mt-9 mb-6">{user.fullname}</h2>
             <p>{user.about}</p>
           </div>
