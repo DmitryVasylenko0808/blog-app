@@ -1,5 +1,5 @@
-import { Container } from "@/shared/ui";
 import Link from "next/link";
+import { Container } from "@/shared/ui";
 import { Logo } from "@/shared/components";
 import { SearchIcon } from "lucide-react";
 import { verifySession } from "@/app/_lib/session";
@@ -18,7 +18,13 @@ const Header = async () => {
           <Link href="/search" className="text-text-primary">
             <SearchIcon size={18} />
           </Link>
-          <Account userId={session?.userId} />
+          {session?.userId ? (
+            <Account userId={session?.userId} />
+          ) : (
+            <Link href="/sign-in" className="text-text-primary">
+              Sign In
+            </Link>
+          )}
         </div>
       </Container>
     </header>
