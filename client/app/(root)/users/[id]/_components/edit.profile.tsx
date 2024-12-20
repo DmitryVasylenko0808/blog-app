@@ -2,10 +2,15 @@
 
 import { useModal } from "@/hooks/useModal";
 import { Button } from "@/shared/ui";
-import Modal from "@/shared/ui/modal";
 import { PencilLine } from "lucide-react";
+import { UserDetails } from "@/services/users/dto/get.one.user.dto";
+import EditProfileFormModal from "./edit.profile.form.modal";
 
-const EditProfile = () => {
+type EditProfileProps = {
+  user: UserDetails;
+};
+
+const EditProfile = ({ user }: EditProfileProps) => {
   const modal = useModal();
 
   return (
@@ -13,9 +18,11 @@ const EditProfile = () => {
       <Button variant="tertiary" onClick={modal.onOpen}>
         <PencilLine /> Edit Profile
       </Button>
-      <Modal open={modal.open} onClose={modal.onClose}>
-        Modal
-      </Modal>
+      <EditProfileFormModal
+        open={modal.open}
+        onClose={modal.onClose}
+        user={user}
+      />
     </div>
   );
 };

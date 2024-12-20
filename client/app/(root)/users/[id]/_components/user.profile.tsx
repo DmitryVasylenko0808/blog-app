@@ -23,7 +23,7 @@ const UserProfile = async ({ user }: UserProfileProps) => {
             />
           </div>
           <div className="flex-auto">
-            {isCurrentUser && <EditProfile />}
+            {isCurrentUser && <EditProfile user={user} />}
             <h2 className="mt-9 mb-6">{user.fullname}</h2>
             <p>{user.about}</p>
           </div>

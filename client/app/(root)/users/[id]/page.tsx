@@ -9,8 +9,6 @@ export default async function ProfilePage(props: {
 
   const user = await UsersService.getOneUser({ id: userId });
 
-  console.log(user);
-
   return (
     <>
       <UserProfile user={user} />
