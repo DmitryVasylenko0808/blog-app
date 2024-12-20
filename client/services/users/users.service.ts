@@ -2,6 +2,7 @@ import { axiosInstance } from "@/app/_lib/axiosInstance";
 import { GetTopUsersDto } from "./dto/get.top.users.dto";
 import axios from "axios";
 import { GetOneUserDto } from "./dto/get.one.user.dto";
+import { GetUserArticlesDto } from "./dto/get.user.articles.dto";
 
 type GetOneUserParams = {
   id: number;
@@ -11,6 +12,11 @@ type UpdateUserParams = {
   id: number;
   fullname?: string;
   about?: string;
+};
+
+type GetUserArticlesParams = {
+  id: number;
+  page: number;
 };
 
 export class UsersService {
@@ -51,6 +57,23 @@ export class UsersService {
           headers: {
             "Content-Type": "multipart/form-data",
           },
+        }
+      );
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async getUserArticles({ id, page }: GetUserArticlesParams) {
+    try {
+      const res = await axiosInstance.get<GetUserArticlesDto>(
+        `/users/${id}/articles`,
+        {
+          params: { page },
         }
       );
 
