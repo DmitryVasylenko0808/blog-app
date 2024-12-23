@@ -25,6 +25,10 @@ type GetOneArticleParams = {
   id: number;
 };
 
+type DeleteArticleParams = {
+  id: number;
+};
+
 export class ArticlesService {
   static async getFeatured() {
     try {
@@ -115,6 +119,19 @@ export class ArticlesService {
     try {
       const { id } = params;
       const res = await axiosInstance.get<GetOneArticleDto>(`/articles/${id}`);
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async delete(params: DeleteArticleParams) {
+    try {
+      const { id } = params;
+      const res = await axiosInstance.delete(`/articles/${id}`);
 
       return res.data;
     } catch (err) {

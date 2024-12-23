@@ -1,8 +1,10 @@
 import { CustomMDX } from "@/app/(root)/_components";
+import { verifySession } from "@/app/_lib/session";
 import { ArticleDetails } from "@/services/articles/dto/get.one.article.dto";
 import { Container } from "@/shared/ui";
 import { CalendarDays, Eye } from "lucide-react";
 import Link from "next/link";
+import ArticleActions from "./article.actions";
 
 type ArticleViewProps = {
   article: ArticleDetails;
@@ -11,9 +13,13 @@ type ArticleViewProps = {
 const ArticleView = async ({ article }: ArticleViewProps) => {
   const date = new Date(article.createdAt);
 
+  const session = await verifySession();
+  const isUserArticle = Number(session?.userId) === article.authorId;
+
   return (
     <section>
       <Container className="py-20">
+        {isUserArticle && <ArticleActions articleId={article.id} />}
         <article>
           <div className="mb-8">
             <span className="inline-block mb-2 px-2 py-1 bg-primary-200 rounded text-xs text-text-tag">
