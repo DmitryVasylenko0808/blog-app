@@ -17,7 +17,7 @@ const ArticleItem = ({ data }: ArticleItemProps) => {
           {data.category.title}
         </span>
         <h3 className="mb-5">
-          <Link href="/post">{data.title}</Link>
+          <Link href={`/articles/${data.id}`}>{data.title}</Link>
         </h3>
         <div className="mb-4 flex gap-x-2.5 items-center text-xs text-text-meta">
           <Link

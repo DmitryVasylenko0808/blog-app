@@ -4,6 +4,7 @@ import { GetFeaturedArticlesDto } from "./dto/get.featured.articles.dto";
 import { GetPopularArticlesDto } from "./dto/get.popular.articles.dto";
 import { GetRecentlyArticlesDto } from "./dto/get.recently.articles.dto";
 import { GetSearchedArticlesDto } from "./dto/get.searched.articles.dto";
+import { GetOneArticleDto } from "./dto/get.one.article.dto";
 
 type GetRecentlyArticlesParams = {
   page?: number;
@@ -13,6 +14,10 @@ type GetRecentlyArticlesParams = {
 type GetSearchedArticlesParams = {
   page: number;
   title?: string;
+};
+
+type GetOneArticleParams = {
+  id: number;
 };
 
 export class ArticlesService {
@@ -77,6 +82,19 @@ export class ArticlesService {
           },
         }
       );
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async getOne(params: GetOneArticleParams) {
+    try {
+      const { id } = params;
+      const res = await axiosInstance.get<GetOneArticleDto>(`/articles/${id}`);
 
       return res.data;
     } catch (err) {

@@ -16,6 +16,7 @@ import CategoriesSkeleton from "./categories.skeleton";
 import TopAuthors from "./top.authors";
 import TopAuthorItem from "./top.author.item";
 import TopAuthorsSkeleton from "./top.authors.skeleton";
+import CustomMDX from "./custom.mdx";
 
 export {
   Header,
@@ -36,4 +37,5 @@ export {
   TopAuthors,
   TopAuthorItem,
   TopAuthorsSkeleton,
+  CustomMDX,
 };

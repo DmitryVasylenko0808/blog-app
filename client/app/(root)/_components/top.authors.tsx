@@ -11,7 +11,7 @@ const TopAuthors = async () => {
       <Title as="h2" filledText="Top" normalText="Authors" className="mb-11" />
       <ul className="flex flex-col space-y-11">
         {topAuthors.map((author: TopUser) => (
-          <TopAuthorItem author={author} />
+          <TopAuthorItem author={author} key={author.id} />
         ))}
       </ul>
     </div>

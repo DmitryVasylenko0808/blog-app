@@ -13,7 +13,7 @@ const ArticlesPopularCard = ({ article }: ArticlesPopularCardProps) => {
         {article.category.title}
       </span>
       <h4 className="mb-4">
-        <Link href="/">{article.title}</Link>
+        <Link href={`/articles/${article.id}`}>{article.title}</Link>
       </h4>
       <div className="flex gap-x-2.5 items-center text-xs text-text-meta">
         <Link
