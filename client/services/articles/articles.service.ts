@@ -5,6 +5,7 @@ import { GetPopularArticlesDto } from "./dto/get.popular.articles.dto";
 import { GetRecentlyArticlesDto } from "./dto/get.recently.articles.dto";
 import { GetSearchedArticlesDto } from "./dto/get.searched.articles.dto";
 import { GetOneArticleDto } from "./dto/get.one.article.dto";
+import { GetRelatedArticlesDto } from "./dto/get.related.articles.dto";
 
 type GetRecentlyArticlesParams = {
   page?: number;
@@ -14,6 +15,10 @@ type GetRecentlyArticlesParams = {
 type GetSearchedArticlesParams = {
   page: number;
   title?: string;
+};
+
+type GetRelatedArticlesParams = {
+  id: number;
 };
 
 type GetOneArticleParams = {
@@ -81,6 +86,21 @@ export class ArticlesService {
             title,
           },
         }
+      );
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async getRelated(params: GetRelatedArticlesParams) {
+    try {
+      const { id } = params;
+      const res = await axiosInstance.get<GetRelatedArticlesDto>(
+        `/articles/${id}/related`
       );
 
       return res.data;
