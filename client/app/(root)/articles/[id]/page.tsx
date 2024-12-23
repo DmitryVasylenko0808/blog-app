@@ -1,6 +1,7 @@
 import { ArticlesService } from "@/services/articles/articles.service";
 import { notFound } from "next/navigation";
 import ArticleView from "./_components/article.view";
+import ArticleViewSkeleton from "./_components/article.view.skeleton";
 
 export default async function ArticlePage(props: {
   params: Promise<{ id?: string }>;
