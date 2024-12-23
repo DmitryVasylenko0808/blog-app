@@ -58,10 +58,10 @@ model Comment {
   user   User @relation(fields: [userId], references: [id])
 
   articleId Int     @map("article_id")
-  article   Article @relation(fields: [articleId], references: [id])
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
   parentId Int?     @map("parent_id")
-  parent   Comment? @relation("CommentToComment", fields: [parentId], references: [id])
+  parent   Comment? @relation("CommentToComment", fields: [parentId], references: [id], onDelete: Cascade)
 
   children Comment[] @relation("CommentToComment")
 

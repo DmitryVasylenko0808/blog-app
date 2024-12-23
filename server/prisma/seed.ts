@@ -45,6 +45,11 @@ const generateUsers = async () => {
       fullname: 'Aymer Hayman',
       password: 'cO6?NVav8',
     },
+    {
+      username: 'text',
+      fullname: 'Test user',
+      password: '11111111',
+    },
   ].map((item) => {
     const passwordHash = bcrypt.hashSync(item.password, 10);
 
