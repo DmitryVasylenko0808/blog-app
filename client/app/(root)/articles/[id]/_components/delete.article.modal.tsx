@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/shared/ui";
 import Modal, { ModalProps } from "@/shared/ui/modal";
 import React from "react";
@@ -12,7 +14,11 @@ const DeleteArticleModal = ({
   ...modalProps
 }: DeleteArticleModalProps) => {
   const handleClickDelete = async () => {
-    await deleteArticle(articleId);
+    const res = await deleteArticle(articleId);
+
+    if (!res.success) {
+      alert(res.message);
+    }
   };
 
   return (
