@@ -44,10 +44,10 @@ const Footer = async () => {
                   <Link href="/">Home</Link>
                 </li>
                 <li>
-                  <Link href="/">About</Link>
+                  <Link href="/about">About</Link>
                 </li>
                 <li>
-                  <Link href="/">FAQ</Link>
+                  <Link href="/faq">FAQ</Link>
                 </li>
               </ul>
             </nav>
