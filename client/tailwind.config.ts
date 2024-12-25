@@ -34,6 +34,7 @@ export default {
       },
       maxWidth: {
         container: "1295px",
+        "md-container": "665px",
       },
     },
   },
