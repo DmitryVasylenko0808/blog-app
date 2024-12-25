@@ -19,7 +19,7 @@ const AccountMenu = ({ user }: AccountMenuProps) => {
           </Link>
         </li>
         <li className="py-1.5 px-3 hover:bg-primary-100">
-          <Link href={`/users/${user.id}`}>
+          <Link href="/articles/create">
             <SquarePen size={20} className="inline" /> Write an article
           </Link>
         </li>

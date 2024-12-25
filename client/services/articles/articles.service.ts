@@ -25,6 +25,21 @@ type GetOneArticleParams = {
   id: number;
 };
 
+type CreateArticleParams = {
+  title: string;
+  categoryId: string;
+  description: string;
+  content: string;
+};
+
+type EditArticleParams = {
+  id: number;
+  title: string;
+  categoryId: string;
+  description: string;
+  content: string;
+};
+
 type DeleteArticleParams = {
   id: number;
 };
@@ -119,6 +134,47 @@ export class ArticlesService {
     try {
       const { id } = params;
       const res = await axiosInstance.get<GetOneArticleDto>(`/articles/${id}`);
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async create(params: CreateArticleParams) {
+    try {
+      const formData = new FormData();
+
+      Object.entries(params).forEach(([k, v]) => formData.append(k, v));
+
+      const res = await axiosInstance.post(`/articles`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      return res.data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        return err.response?.data;
+      }
+    }
+  }
+
+  static async edit(params: EditArticleParams) {
+    try {
+      const formData = new FormData();
+      const { id, ...data } = params;
+
+      Object.entries(data).forEach(([k, v]) => formData.append(k, v));
+
+      const res = await axiosInstance.patch(`/articles/${id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       return res.data;
     } catch (err) {

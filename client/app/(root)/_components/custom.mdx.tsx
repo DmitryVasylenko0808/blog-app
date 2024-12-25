@@ -1,5 +1,5 @@
 import { MDXRemote, MDXRemoteProps } from "next-mdx-remote/rsc";
-import { ComponentPropsWithRef } from "react";
+import { ComponentProps, ComponentPropsWithRef } from "react";
 
 const components = {
   h1: (props: ComponentPropsWithRef<"h1">) => (
@@ -41,6 +41,11 @@ const components = {
     <a {...props} className="text-primary-300 underline hover:text-primary-400">
       {props.children}
     </a>
+  ),
+  blockquote: (props: ComponentProps<"blockquote">) => (
+    <blockquote className="mb-6 p-8 pb-2 bg-primary-100 italic">
+      {props.children}
+    </blockquote>
   ),
   ul: (props: ComponentPropsWithRef<"ul">) => (
     <ul {...props} className="mb-6 space-y-3 list-disc list-inside">
