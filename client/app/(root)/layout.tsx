@@ -19,9 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${notoSans.className} antialiased`}>
+      <body
+        className={`${notoSans.className} antialiased min-h-screen flex flex-col`}
+      >
         <Header />
-        <main>{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

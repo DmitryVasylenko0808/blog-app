@@ -3,7 +3,7 @@ import { LoaderCircle } from "lucide-react";
 
 type LoaderProps = {
   color: "primary" | "white";
-  size: "sm" | "md";
+  size: "sm" | "md" | "lg";
 };
 
 const Loader = ({ color, size }: LoaderProps) => {
@@ -15,6 +15,7 @@ const Loader = ({ color, size }: LoaderProps) => {
   const sizeMap = new Map<typeof size, number>();
   sizeMap.set("sm", 24);
   sizeMap.set("md", 36);
+  sizeMap.set("lg", 54);
 
   return <LoaderCircle size={sizeMap.get(size)} className={classes} />;
 };
