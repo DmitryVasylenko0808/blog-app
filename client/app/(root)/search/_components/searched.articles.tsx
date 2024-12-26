@@ -1,9 +1,10 @@
 "use client";
 
+import { useDebounce } from "@/hooks/useDebonce";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { GetSearchedArticlesDto } from "@/services/articles/dto/get.searched.articles.dto";
 import { ResultPanel, ArticlesList, Pagination } from "@/shared/components";
 import { Container, TextField } from "@/shared/ui";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 type SearchedArticlesProps = {
   data: GetSearchedArticlesDto;
@@ -16,7 +17,7 @@ const SearchedArticles = ({ data, page, title }: SearchedArticlesProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useDebounce((e: React.ChangeEvent<HTMLInputElement>) => {
     const params = new URLSearchParams(searchParams);
 
     params.delete("page");
@@ -28,7 +29,7 @@ const SearchedArticles = ({ data, page, title }: SearchedArticlesProps) => {
     }
 
     router.replace(`${pathname}?${params.toString()}`);
-  };
+  }, 300);
 
   return (
     <Container className="pt-20 pb-24">
