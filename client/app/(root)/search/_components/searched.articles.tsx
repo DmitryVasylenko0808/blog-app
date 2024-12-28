@@ -3,7 +3,12 @@
 import { useDebounce } from "@/hooks/useDebonce";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { GetSearchedArticlesDto } from "@/services/articles/dto/get.searched.articles.dto";
-import { ResultPanel, ArticlesList, Pagination } from "@/shared/components";
+import {
+  ResultPanel,
+  ArticlesList,
+  Pagination,
+  NoData,
+} from "@/shared/components";
 import { Container, TextField } from "@/shared/ui";
 
 type SearchedArticlesProps = {
@@ -47,7 +52,11 @@ const SearchedArticles = ({ data, page, title }: SearchedArticlesProps) => {
           </span>
         }
       />
-      <ArticlesList data={data.data} />
+      {data.data.length ? (
+        <ArticlesList data={data.data} />
+      ) : (
+        <NoData text="No Articles" />
+      )}
       <Pagination totalPages={data.totalPages} currentPage={page} />
     </Container>
   );

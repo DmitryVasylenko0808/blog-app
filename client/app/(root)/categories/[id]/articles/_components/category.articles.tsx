@@ -1,5 +1,10 @@
 import { GetCategoryArticlesDto } from "@/services/categories/dto/get.category.articles.dto";
-import { ArticlesList, Pagination, ResultPanel } from "@/shared/components";
+import {
+  ArticlesList,
+  NoData,
+  Pagination,
+  ResultPanel,
+} from "@/shared/components";
 import { Container } from "@/shared/ui";
 
 type CategoryArticlesProps = {
@@ -14,11 +19,17 @@ const CategoryArticles = ({ data, page }: CategoryArticlesProps) => {
         title={
           <span>
             Articles by category{" "}
-            <span className="font-semibold">{data.data[0].category.title}</span>
+            <span className="font-semibold">
+              {data?.data[0]?.category.title}
+            </span>
           </span>
         }
       />
-      <ArticlesList data={data.data} />
+      {data.data.length ? (
+        <ArticlesList data={data.data} />
+      ) : (
+        <NoData text="No Articles" />
+      )}
       <Pagination totalPages={data.totalPages} currentPage={page} />
     </Container>
   );

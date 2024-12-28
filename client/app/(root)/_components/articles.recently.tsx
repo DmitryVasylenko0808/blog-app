@@ -1,5 +1,5 @@
 import { ArticlesService } from "@/services/articles/articles.service";
-import { ArticlesList, Pagination } from "@/shared/components";
+import { ArticlesList, NoData, Pagination } from "@/shared/components";
 import { Title } from "@/shared/ui";
 
 type ArticleRecentlyProps = {
@@ -24,7 +24,11 @@ const ArticlesRecently = async ({
         normalText="Posted"
         className="mb-14"
       />
-      <ArticlesList data={data.data} />
+      {data.data.length ? (
+        <ArticlesList data={data.data} />
+      ) : (
+        <NoData text="No Articles" />
+      )}
       <Pagination totalPages={data.totalPages} currentPage={currentPage} />
     </div>
   );

@@ -1,6 +1,7 @@
 import { Title } from "@/shared/ui";
 import ArticlesPopularView from "./articles.popular.view";
 import { ArticlesService } from "@/services/articles/articles.service";
+import { NoData } from "@/shared/components";
 
 const ArticlesPopular = async () => {
   const data = await ArticlesService.getPopular();
@@ -13,7 +14,11 @@ const ArticlesPopular = async () => {
         normalText="Posted"
         className="mb-14"
       />
-      <ArticlesPopularView articles={data} />
+      {data.length ? (
+        <ArticlesPopularView articles={data} />
+      ) : (
+        <NoData text="No Articles" />
+      )}
     </div>
   );
 };

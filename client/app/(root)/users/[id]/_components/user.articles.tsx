@@ -10,6 +10,10 @@ type UserArticlesProps = {
 const UserArticles = async ({ userId, page }: UserArticlesProps) => {
   const userArticles = await UsersService.getUserArticles({ id: userId, page });
 
+  if (!userArticles.data.length) {
+    return null;
+  }
+
   return (
     <section>
       <Container className="pt-20 pb-24">
