@@ -6,16 +6,19 @@ import { redirect } from "next/navigation";
 type DeleteArticleState = {
   success: boolean;
   message: string;
-};
+} | null;
 
-export const deleteArticle = async (id: number) => {
+export const deleteArticle = async (
+  id: number,
+  prevState: DeleteArticleState
+): Promise<DeleteArticleState> => {
   const res = await ArticlesService.delete({ id });
 
   if (res.error) {
     return {
       success: false,
       message: res.message,
-    } as DeleteArticleState;
+    };
   }
 
   redirect("/");

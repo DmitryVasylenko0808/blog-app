@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@/shared/ui";
+import { Button, Loader } from "@/shared/ui";
 import Modal, { ModalProps } from "@/shared/ui/modal";
-import React from "react";
+import React, { useActionState, useEffect } from "react";
 import { deleteArticle } from "../_actions/delete.article";
 
 type DeleteArticleModalProps = ModalProps & {
@@ -13,23 +13,31 @@ const DeleteArticleModal = ({
   articleId,
   ...modalProps
 }: DeleteArticleModalProps) => {
-  const handleClickDelete = async () => {
-    const res = await deleteArticle(articleId);
+  const deleteArticleWithId = deleteArticle.bind(null, articleId);
+  const [state, action, isPending] = useActionState(deleteArticleWithId, null);
 
-    if (!res.success) {
-      alert(res.message);
+  useEffect(() => {
+    if (state && !state.success) {
+      alert(state.message);
     }
-  };
+  }, [state]);
 
   return (
     <Modal {...modalProps}>
       <div className="w-[460px]">
-        <h3 className="mb-8">Do you really want to delete this article?</h3>
-        <div className="flex justify-end">
-          <Button variant="primary" size="md" onClick={handleClickDelete}>
-            Delete
-          </Button>
-        </div>
+        <form>
+          <h3 className="mb-8">Do you really want to delete this article?</h3>
+          <div className="flex justify-end">
+            <Button
+              variant="primary"
+              size="md"
+              formAction={action}
+              disabled={isPending}
+            >
+              {isPending ? <Loader color="white" size="sm" /> : "Delete"}
+            </Button>
+          </div>
+        </form>
       </div>
     </Modal>
   );
