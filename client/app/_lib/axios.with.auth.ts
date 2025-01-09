@@ -1,11 +1,11 @@
 import axios from "axios";
 import { getSession } from "./session";
 
-const axiosInstance = axios.create({
+const axiosWithAuth = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-axiosInstance.interceptors.request.use(
+axiosWithAuth.interceptors.request.use(
   async (cfg) => {
     const access_token = await getSession();
 
@@ -20,4 +20,4 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-export { axiosInstance };
+export { axiosWithAuth };

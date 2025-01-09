@@ -1,6 +1,6 @@
-import { axiosInstance } from "@/app/_lib/axiosInstance";
-import { GetCategoriesDto } from "./dto/get.categories.dto";
 import axios from "axios";
+import { axiosPublic } from "@/app/_lib/axios.public";
+import { GetCategoriesDto } from "./dto/get.categories.dto";
 import { GetCategoryArticlesDto } from "./dto/get.category.articles.dto";
 
 type GetArticlesByCategoryParams = {
@@ -11,7 +11,7 @@ type GetArticlesByCategoryParams = {
 export class CategoriesService {
   static async getCategories() {
     try {
-      const res = await axiosInstance.get<GetCategoriesDto>("/categories");
+      const res = await axiosPublic.get<GetCategoriesDto>("/categories");
 
       return res.data;
     } catch (err) {
@@ -26,7 +26,7 @@ export class CategoriesService {
     page,
   }: GetArticlesByCategoryParams) {
     try {
-      const res = await axiosInstance.get<GetCategoryArticlesDto>(
+      const res = await axiosPublic.get<GetCategoryArticlesDto>(
         `/categories/${id}/articles`,
         {
           params: {

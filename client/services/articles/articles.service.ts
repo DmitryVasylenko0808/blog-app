@@ -1,5 +1,6 @@
-import { axiosInstance } from "@/app/_lib/axiosInstance";
 import axios from "axios";
+import { axiosWithAuth } from "@/app/_lib/axios.with.auth";
+import { axiosPublic } from "@/app/_lib/axios.public";
 import { GetFeaturedArticlesDto } from "./dto/get.featured.articles.dto";
 import { GetPopularArticlesDto } from "./dto/get.popular.articles.dto";
 import { GetRecentlyArticlesDto } from "./dto/get.recently.articles.dto";
@@ -47,7 +48,7 @@ type DeleteArticleParams = {
 export class ArticlesService {
   static async getFeatured() {
     try {
-      const res = await axiosInstance.get<GetFeaturedArticlesDto>(
+      const res = await axiosPublic.get<GetFeaturedArticlesDto>(
         "/articles/featured"
       );
 
@@ -61,7 +62,7 @@ export class ArticlesService {
 
   static async getPopular() {
     try {
-      const res = await axiosInstance.get<GetPopularArticlesDto>(
+      const res = await axiosPublic.get<GetPopularArticlesDto>(
         "/articles/popular"
       );
 
@@ -76,7 +77,7 @@ export class ArticlesService {
   static async getRecently(params: GetRecentlyArticlesParams) {
     try {
       const { page, categoriesIds } = params;
-      const res = await axiosInstance.get<GetRecentlyArticlesDto>(
+      const res = await axiosPublic.get<GetRecentlyArticlesDto>(
         "/articles/recently",
         {
           params: {
@@ -97,7 +98,7 @@ export class ArticlesService {
   static async getSearched(params: GetSearchedArticlesParams) {
     try {
       const { page, title } = params;
-      const res = await axiosInstance.get<GetSearchedArticlesDto>(
+      const res = await axiosPublic.get<GetSearchedArticlesDto>(
         "/articles/search/by/title",
         {
           params: {
@@ -118,7 +119,7 @@ export class ArticlesService {
   static async getRelated(params: GetRelatedArticlesParams) {
     try {
       const { id } = params;
-      const res = await axiosInstance.get<GetRelatedArticlesDto>(
+      const res = await axiosPublic.get<GetRelatedArticlesDto>(
         `/articles/${id}/related`
       );
 
@@ -133,7 +134,7 @@ export class ArticlesService {
   static async getOne(params: GetOneArticleParams) {
     try {
       const { id } = params;
-      const res = await axiosInstance.get<GetOneArticleDto>(`/articles/${id}`);
+      const res = await axiosPublic.get<GetOneArticleDto>(`/articles/${id}`);
 
       return res.data;
     } catch (err) {
@@ -149,7 +150,7 @@ export class ArticlesService {
 
       Object.entries(params).forEach(([k, v]) => formData.append(k, v));
 
-      const res = await axiosInstance.post(`/articles`, formData, {
+      const res = await axiosWithAuth.post(`/articles`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -170,7 +171,7 @@ export class ArticlesService {
 
       Object.entries(data).forEach(([k, v]) => formData.append(k, v));
 
-      const res = await axiosInstance.patch(`/articles/${id}`, formData, {
+      const res = await axiosWithAuth.patch(`/articles/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -187,7 +188,7 @@ export class ArticlesService {
   static async delete(params: DeleteArticleParams) {
     try {
       const { id } = params;
-      const res = await axiosInstance.delete(`/articles/${id}`);
+      const res = await axiosWithAuth.delete(`/articles/${id}`);
 
       return res.data;
     } catch (err) {

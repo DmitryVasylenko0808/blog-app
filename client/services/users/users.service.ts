@@ -1,8 +1,9 @@
-import { axiosInstance } from "@/app/_lib/axiosInstance";
+import { axiosWithAuth } from "@/app/_lib/axios.with.auth";
 import { GetTopUsersDto } from "./dto/get.top.users.dto";
 import axios from "axios";
 import { GetOneUserDto } from "./dto/get.one.user.dto";
 import { GetUserArticlesDto } from "./dto/get.user.articles.dto";
+import { axiosPublic } from "@/app/_lib/axios.public";
 
 type GetOneUserParams = {
   id: number;
@@ -22,7 +23,7 @@ type GetUserArticlesParams = {
 export class UsersService {
   static async getOneUser(params: GetOneUserParams) {
     try {
-      const res = await axiosInstance.get<GetOneUserDto>(`/users/${params.id}`);
+      const res = await axiosPublic.get<GetOneUserDto>(`/users/${params.id}`);
 
       return res.data;
     } catch (err) {
@@ -34,7 +35,7 @@ export class UsersService {
 
   static async getTop() {
     try {
-      const res = await axiosInstance.get<GetTopUsersDto>("/users/top");
+      const res = await axiosPublic.get<GetTopUsersDto>("/users/top");
 
       return res.data;
     } catch (err) {
@@ -50,7 +51,7 @@ export class UsersService {
 
       Object.entries(data).forEach(([k, v]) => formData.append(k, v));
 
-      const res = await axiosInstance.patch<GetTopUsersDto>(
+      const res = await axiosWithAuth.patch<GetTopUsersDto>(
         `/users/${id}`,
         formData,
         {
@@ -70,7 +71,7 @@ export class UsersService {
 
   static async getUserArticles({ id, page }: GetUserArticlesParams) {
     try {
-      const res = await axiosInstance.get<GetUserArticlesDto>(
+      const res = await axiosPublic.get<GetUserArticlesDto>(
         `/users/${id}/articles`,
         {
           params: { page },

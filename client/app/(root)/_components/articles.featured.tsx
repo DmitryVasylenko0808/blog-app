@@ -6,7 +6,7 @@ const ArticlesFeatured = async () => {
   const articles = await ArticlesService.getFeatured();
 
   return (
-    <div>
+    <div className="flex-1">
       <Title
         as="h2"
         filledText="Featured"
