@@ -1,14 +1,12 @@
-import { ArticlesService } from "@/services/articles/articles.service";
+import { Article } from "@/services/articles/dto/get.related.articles.dto";
 import { ArticlesList } from "@/shared/components";
 import { Container, Title } from "@/shared/ui";
 
 type RelatedArticlesProps = {
-  articleId: number;
+  articles: Article[];
 };
 
-const RelatedArticles = async ({ articleId }: RelatedArticlesProps) => {
-  const articles = await ArticlesService.getRelated({ id: articleId });
-
+const RelatedArticles = async ({ articles }: RelatedArticlesProps) => {
   if (!articles || !articles.length) {
     return null;
   }

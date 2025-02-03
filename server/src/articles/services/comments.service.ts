@@ -29,6 +29,7 @@ export class CommentsService {
           select: {
             id: true,
             username: true,
+            fullname: true,
             avatarUrl: true,
           },
         },
@@ -111,6 +112,7 @@ export class CommentsService {
           select: {
             id: true,
             username: true,
+            fullname: true,
             avatarUrl: true,
           },
         },

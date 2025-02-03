@@ -1,15 +1,21 @@
-import { Suspense } from "react";
-import { ArticlesService } from "@/services/articles/articles.service";
 import { notFound } from "next/navigation";
+import { verifySession } from "@/app/_lib/session";
+import { ArticlesService } from "@/services/articles/articles.service";
+import { CommentsService } from "@/services/comments/comments.service";
 import ArticleView from "./_components/article.view";
 import RelatedArticles from "./_components/related.articles";
-import { ArticlesSkeleton } from "../../_components";
+import ArticleComments from "./_components/articles.comments";
 
 export default async function ArticlePage(props: {
   params: Promise<{ id?: string }>;
+  searchParams: Promise<{ page?: string; sort?: "asc" | "desc" }>;
 }) {
   const params = await props.params;
+  const searchParams = await props.searchParams;
+
   const id = Number(params.id);
+  const page = Number(searchParams?.page || "1");
+  const sort = searchParams?.sort || "desc";
 
   const data = await ArticlesService.getOne({ id });
 
@@ -17,19 +23,26 @@ export default async function ArticlePage(props: {
     notFound();
   }
 
+  const session = await verifySession();
+  const isUserArticle = Number(session?.userId) === data.authorId;
+
+  const relatedArticles = await ArticlesService.getRelated({ id });
+  const articleComments = await CommentsService.getComments({
+    articleId: id,
+    page,
+    sort,
+  });
+
   return (
     <>
-      <ArticleView article={data} />
-      <Suspense
-        fallback={
-          <ArticlesSkeleton
-            countItems={2}
-            className="mx-auto max-w-container pb-20"
-          />
-        }
-      >
-        <RelatedArticles articleId={id} />
-      </Suspense>
+      <ArticleView article={data} userArticle={isUserArticle} />
+      <RelatedArticles articles={relatedArticles} />
+      <ArticleComments
+        comments={articleComments}
+        articleId={id}
+        page={page}
+        sort={sort}
+      />
     </>
   );
 }

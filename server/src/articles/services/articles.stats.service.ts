@@ -30,4 +30,17 @@ export class ArticlesStatsService {
 
     return res;
   }
+
+  async addView(articleId: number) {
+    await this.prismaService.article.update({
+      where: {
+        id: articleId,
+      },
+      data: {
+        viewsCount: {
+          increment: 1,
+        },
+      },
+    });
+  }
 }

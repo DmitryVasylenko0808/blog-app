@@ -1,4 +1,6 @@
+import { imagesUrl, nullAvatarUrl } from "@/constants";
 import { TopUser } from "@/services/users/dto/get.top.users.dto";
+import Image from "next/image";
 import Link from "next/link";
 
 type TopAuthorItemProps = {
@@ -6,14 +8,18 @@ type TopAuthorItemProps = {
 };
 
 const TopAuthorItem = ({ author }: TopAuthorItemProps) => {
+  const userAvatar = author.avatarUrl
+    ? `${imagesUrl}/${author.avatarUrl}`
+    : nullAvatarUrl!;
+
   return (
     <li className="flex gap-x-6 items-center">
       <Link href={`/users/${author.id}`}>
-        <img
+        <Image
           width={80}
           height={80}
           className="rounded-full"
-          src="https://cdn5.vectorstock.com/i/1000x1000/43/94/default-avatar-photo-placeholder-icon-grey-vector-38594394.jpg"
+          src={userAvatar}
           alt="user avatar"
         />
       </Link>

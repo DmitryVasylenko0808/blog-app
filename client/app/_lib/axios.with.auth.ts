@@ -1,8 +1,9 @@
 import axios from "axios";
 import { getSession } from "./session";
+import { apiUrl } from "@/constants";
 
 const axiosWithAuth = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: apiUrl,
 });
 
 axiosWithAuth.interceptors.request.use(

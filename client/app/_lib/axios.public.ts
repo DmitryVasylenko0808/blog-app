@@ -1,7 +1,8 @@
 import axios from "axios";
+import { apiUrl } from "@/constants";
 
 const axiosPublic = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: apiUrl,
 });
 
 export { axiosPublic };

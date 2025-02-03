@@ -2,13 +2,14 @@ import { cn } from "@/utils/cn";
 import { LoaderCircle } from "lucide-react";
 
 type LoaderProps = {
-  color: "primary" | "white";
+  color: "primary" | "secondary" | "white";
   size: "sm" | "md" | "lg";
 };
 
 const Loader = ({ color, size }: LoaderProps) => {
   const classes = cn("animate-spin", {
     "text-primary-300": color === "primary",
+    "text-text-meta": color === "secondary",
     "text-white": color === "white",
   });
 

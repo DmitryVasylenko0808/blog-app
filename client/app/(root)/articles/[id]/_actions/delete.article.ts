@@ -14,7 +14,7 @@ export const deleteArticle = async (
 ): Promise<DeleteArticleState> => {
   const res = await ArticlesService.delete({ id });
 
-  if (res.error) {
+  if (res.statusCode >= 400) {
     return {
       success: false,
       message: res.message,

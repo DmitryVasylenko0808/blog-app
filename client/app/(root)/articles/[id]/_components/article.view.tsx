@@ -5,21 +5,25 @@ import { Container } from "@/shared/ui";
 import { CalendarDays, Eye } from "lucide-react";
 import Link from "next/link";
 import ArticleActions from "./article.actions";
+import { imagesUrl, nullAvatarUrl } from "@/constants";
+import Image from "next/image";
 
 type ArticleViewProps = {
   article: ArticleDetails;
+  userArticle: boolean;
 };
 
-const ArticleView = async ({ article }: ArticleViewProps) => {
+const ArticleView = async ({ article, userArticle }: ArticleViewProps) => {
   const date = new Date(article.createdAt);
 
-  const session = await verifySession();
-  const isUserArticle = Number(session?.userId) === article.authorId;
+  const userAvatar = article.author.avatarUrl
+    ? `${imagesUrl}/${article.author.avatarUrl}`
+    : nullAvatarUrl!;
 
   return (
     <section>
       <Container className="py-20">
-        {isUserArticle && <ArticleActions articleId={article.id} />}
+        {userArticle && <ArticleActions articleId={article.id} />}
         <article>
           <div className="mb-8">
             <span className="inline-block mb-2 px-2 py-1 bg-primary-200 rounded text-xs text-text-tag">
@@ -31,10 +35,10 @@ const ArticleView = async ({ article }: ArticleViewProps) => {
                 href={`/users/${article.authorId}`}
                 className="inline-flex items-center"
               >
-                <img
+                <Image
                   width={18}
                   height={18}
-                  src="https://cdn5.vectorstock.com/i/1000x1000/43/94/default-avatar-photo-placeholder-icon-grey-vector-38594394.jpg"
+                  src={userAvatar}
                   alt="user avatar"
                   className="inline rounded-full mr-2"
                 />

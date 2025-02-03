@@ -45,6 +45,10 @@ type DeleteArticleParams = {
   id: number;
 };
 
+type AddViewArticleParams = {
+  id: number;
+};
+
 export class ArticlesService {
   static async getFeatured() {
     try {

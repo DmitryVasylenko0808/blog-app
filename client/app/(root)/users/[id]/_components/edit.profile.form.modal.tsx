@@ -5,6 +5,7 @@ import { UserDetails } from "@/services/users/dto/get.one.user.dto";
 import Modal, { ModalProps } from "@/shared/ui/modal";
 import { Button, Loader, TextArea, TextField } from "@/shared/ui";
 import { updateUser } from "../_actions/update.user";
+import SelectProfilePhoto from "./select.profile.photo";
 
 type EditProfileFormModalProps = ModalProps & { user: UserDetails };
 
@@ -26,6 +27,9 @@ const EditProfileFormModal = ({
       <div className="w-[420px]">
         <form action={formAction}>
           <h3 className="mb-8">Editing Profile</h3>
+
+          <SelectProfilePhoto defaultImage={user.avatarUrl} />
+
           <TextField
             label="Full Name"
             className="mb-6"

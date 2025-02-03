@@ -9,8 +9,11 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   app.enableCors();
-  app.useStaticAssets(join(__dirname, '..', 'uploads'), { prefix: '/uploads' });
   app.setGlobalPrefix('api');
+  console.log(join(__dirname, '..', '..', 'uploads/images'));
+  app.useStaticAssets(join(__dirname, '..', '..', 'uploads/images'), {
+    prefix: '/images',
+  });
 
   await app.listen(configService.get<number>('PORT') || 4444);
 }

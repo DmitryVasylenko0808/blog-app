@@ -13,6 +13,7 @@ type UpdateUserParams = {
   id: number;
   fullname?: string;
   about?: string;
+  avatarFile?: File;
 };
 
 type GetUserArticlesParams = {
@@ -46,6 +47,8 @@ export class UsersService {
   }
 
   static async updateUser({ id, ...data }: UpdateUserParams) {
+    console.log(data);
+
     try {
       const formData = new FormData();
 

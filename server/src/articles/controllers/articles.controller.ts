@@ -23,12 +23,14 @@ import { uploadsStorage } from 'src/multer';
 import { CurrentUser } from 'src/auth/decorators';
 import { TokenPayload } from 'src/auth/types/token.payload';
 import { ArticlesManagementService } from '../services/articles.management.service';
+import { ArticlesStatsService } from '../services/articles.stats.service';
 
 @Controller('articles')
 export class ArticlesController {
   constructor(
     private readonly articlesService: ArticlesService,
     private readonly articleManagementService: ArticlesManagementService,
+    private readonly articleStatsService: ArticlesStatsService,
   ) {}
 
   @Get('featured')
@@ -51,7 +53,10 @@ export class ArticlesController {
 
   @Get(':id')
   async getOne(@Param('id', ParseIntPipe) id: number) {
-    return await this.articlesService.getOneOrThrow(id);
+    const article = await this.articlesService.getOneOrThrow(id);
+    await this.articleStatsService.addView(id);
+
+    return article;
   }
 
   @Get(':id/related')
@@ -106,5 +111,10 @@ export class ArticlesController {
   @UseGuards(AuthGuard('jwt'))
   async delete(@Param('id', ParseIntPipe) id: number) {
     return await this.articleManagementService.delete(id);
+  }
+
+  @Patch(':id/viewed')
+  async addView(@Param('id', ParseIntPipe) id: number) {
+    await this.articleStatsService.addView(id);
   }
 }

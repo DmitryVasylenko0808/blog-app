@@ -1,3 +1,4 @@
+import { imagesUrl, nullAvatarUrl } from "@/constants";
 import { Article } from "@/services/articles/dto/get.recently.articles.dto";
 import { CalendarDays, Eye } from "lucide-react";
 import Image from "next/image";
@@ -8,6 +9,9 @@ type ArticleItemProps = {
 };
 
 const ArticleItem = ({ data }: ArticleItemProps) => {
+  const userAvatar = data.author.avatarUrl
+    ? `${imagesUrl}/${data.author.avatarUrl}`
+    : nullAvatarUrl!;
   const date = new Date(data.createdAt);
 
   return (
@@ -24,10 +28,10 @@ const ArticleItem = ({ data }: ArticleItemProps) => {
             href={`/users/${data.authorId}`}
             className="inline-flex items-center"
           >
-            <img
+            <Image
               width={18}
               height={18}
-              src="https://cdn5.vectorstock.com/i/1000x1000/43/94/default-avatar-photo-placeholder-icon-grey-vector-38594394.jpg"
+              src={userAvatar}
               alt="user avatar"
               className="inline rounded-full mr-2"
             />

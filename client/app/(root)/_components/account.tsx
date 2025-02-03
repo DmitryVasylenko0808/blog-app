@@ -1,5 +1,7 @@
 import { UsersService } from "@/services/users/users.service";
 import AccountMenu from "./account.menu";
+import { imagesUrl, nullAvatarUrl } from "@/constants";
+import Image from "next/image";
 
 type AccountProps = {
   userId: string;
@@ -7,6 +9,9 @@ type AccountProps = {
 
 const Account = async ({ userId }: AccountProps) => {
   const currentUser = await UsersService.getOneUser({ id: Number(userId) });
+  const userAvatar = currentUser.avatarUrl
+    ? `${imagesUrl}/${currentUser.avatarUrl}`
+    : nullAvatarUrl!;
 
   return (
     <div className="relative">
@@ -15,10 +20,12 @@ const Account = async ({ userId }: AccountProps) => {
           <span>{currentUser.username}</span>
         </div>
         <div className="w-8 h-8">
-          <img
-            src="https://cdn5.vectorstock.com/i/1000x1000/43/94/default-avatar-photo-placeholder-icon-grey-vector-38594394.jpg"
+          <Image
+            src={userAvatar}
             alt="user avatar"
             className="w-full h-full rounded-full"
+            width={32}
+            height={32}
           />
         </div>
       </div>

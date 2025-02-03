@@ -10,12 +10,14 @@ const updateUserSchema = z.object({
     .min(1, "Full Name must have at least 3 characters")
     .trim(),
   about: z.string().trim().optional(),
+  avatarFile: z.any().optional(),
 });
 
 export type UpdateUserState = {
   errors?: {
     fullname?: string;
     about?: string;
+    avatarFile?: string;
     root?: string;
   };
   message?: string;
@@ -29,6 +31,7 @@ export const updateUser = async (
   const validatedFields = updateUserSchema.safeParse({
     fullname: formData.get("fullname"),
     about: formData.get("about"),
+    avatarFile: formData.get("avatarFile"),
   });
 
   if (!validatedFields.success) {

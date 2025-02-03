@@ -129,6 +129,7 @@ export class ArticlesService {
             id: true,
             username: true,
             fullname: true,
+            avatarUrl: true,
           },
         },
         category: true,
@@ -138,17 +139,6 @@ export class ArticlesService {
     if (!article) {
       throw new NotFoundException('Article is not found');
     }
-
-    await this.prismaService.article.update({
-      where: {
-        id,
-      },
-      data: {
-        viewsCount: {
-          increment: 1,
-        },
-      },
-    });
 
     return article;
   }

@@ -3,6 +3,7 @@
 import { signIn } from "@/app/(auth)/_lib/actions";
 import { TextField, Button, Loader } from "@/shared/ui";
 import { useActionState } from "react";
+import WithoutAccount from "./without.account";
 
 const SignInForm = () => {
   const [state, formAction, pending] = useActionState(signIn, null);
@@ -30,11 +31,12 @@ const SignInForm = () => {
         type="submit"
         variant="primary"
         size="md"
-        className="w-full"
+        className="w-full mb-8"
         disabled={pending}
       >
         {pending ? <Loader color="white" size="sm" /> : "Login"}
       </Button>
+      <WithoutAccount />
     </form>
   );
 };

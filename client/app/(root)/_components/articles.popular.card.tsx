@@ -1,12 +1,18 @@
 import Link from "next/link";
 import { Article } from "@/services/articles/dto/get.popular.articles.dto";
 import { Eye } from "lucide-react";
+import { imagesUrl, nullAvatarUrl } from "@/constants";
+import Image from "next/image";
 
 type ArticlesPopularCardProps = {
   article: Article;
 };
 
 const ArticlesPopularCard = ({ article }: ArticlesPopularCardProps) => {
+  const userAvatar = article.author.avatarUrl
+    ? `${imagesUrl}/${article.author.avatarUrl}`
+    : nullAvatarUrl!;
+
   return (
     <div className="w-[362px] min-h-[162px] p-6 bg-white">
       <span className="inline-block mb-3 px-2 py-1 bg-primary-200 rounded text-xs text-text-tag">
@@ -20,10 +26,10 @@ const ArticlesPopularCard = ({ article }: ArticlesPopularCardProps) => {
           href={`/users/${article.authorId}`}
           className="inline-flex items-center"
         >
-          <img
+          <Image
             width={18}
             height={18}
-            src="https://cdn5.vectorstock.com/i/1000x1000/43/94/default-avatar-photo-placeholder-icon-grey-vector-38594394.jpg"
+            src={userAvatar}
             alt="user avatar"
             className="inline rounded-full mr-2"
           />

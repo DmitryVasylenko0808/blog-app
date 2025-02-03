@@ -3,7 +3,7 @@ import { extname } from 'path';
 import { v4 } from 'uuid';
 
 export const uploadsStorage = diskStorage({
-  destination: './uploads',
+  destination: './uploads/images',
   filename(req, file, callback) {
     callback(null, generateFilename(file));
   },
